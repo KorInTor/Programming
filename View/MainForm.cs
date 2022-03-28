@@ -15,6 +15,11 @@ namespace Programming
         public MainForm()
         {
             InitializeComponent();
+
+        }
+
+        private void EnumListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }
