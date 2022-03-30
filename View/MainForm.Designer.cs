@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Enum = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.IntValues = new System.Windows.Forms.TextBox();
             this.ValuesListBox = new System.Windows.Forms.ListBox();
             this.EnumListBox = new System.Windows.Forms.ListBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl.SuspendLayout();
             this.Enum.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +49,7 @@
             // 
             // Enum
             // 
-            this.Enum.Controls.Add(this.textBox1);
+            this.Enum.Controls.Add(this.IntValues);
             this.Enum.Controls.Add(this.ValuesListBox);
             this.Enum.Controls.Add(this.EnumListBox);
             this.Enum.Location = new System.Drawing.Point(4, 22);
@@ -62,19 +60,20 @@
             this.Enum.Text = "Enums";
             this.Enum.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // IntValues
             // 
-            this.textBox1.Location = new System.Drawing.Point(360, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.IntValues.Location = new System.Drawing.Point(360, 43);
+            this.IntValues.Name = "IntValues";
+            this.IntValues.Size = new System.Drawing.Size(100, 20);
+            this.IntValues.TabIndex = 2;
+            this.IntValues.TextChanged += new System.EventHandler(this.IntValues_TextChanged);
             // 
             // ValuesListBox
             // 
             this.ValuesListBox.FormattingEnabled = true;
-            this.ValuesListBox.Location = new System.Drawing.Point(189, 43);
+            this.ValuesListBox.Location = new System.Drawing.Point(175, 43);
             this.ValuesListBox.Name = "ValuesListBox";
-            this.ValuesListBox.Size = new System.Drawing.Size(120, 290);
+            this.ValuesListBox.Size = new System.Drawing.Size(134, 290);
             this.ValuesListBox.TabIndex = 1;
             // 
             // EnumListBox
@@ -82,13 +81,8 @@
             this.EnumListBox.FormattingEnabled = true;
             this.EnumListBox.Location = new System.Drawing.Point(6, 43);
             this.EnumListBox.Name = "EnumListBox";
-            this.EnumListBox.Size = new System.Drawing.Size(120, 290);
+            this.EnumListBox.Size = new System.Drawing.Size(138, 290);
             this.EnumListBox.TabIndex = 0;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // MainForm
             // 
@@ -109,10 +103,9 @@
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage Enum;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox IntValues;
         private System.Windows.Forms.ListBox ValuesListBox;
         private System.Windows.Forms.ListBox EnumListBox;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Programming
 {
-    public enum Smartphonemanufacturers
+    public enum EducationForm
     {
-        Samsung,
-        Apple,
-        Nokia,
-        Huawei,
-        Xiaomi
+        fulltime,
+        parttime, 
+        evening,
+        remote
     }
 }
