@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.Enum = new System.Windows.Forms.TabPage();
+            this.Enums = new System.Windows.Forms.TabPage();
             this.IntValues = new System.Windows.Forms.TextBox();
             this.ValuesListBox = new System.Windows.Forms.ListBox();
             this.EnumListBox = new System.Windows.Forms.ListBox();
             this.tabControl.SuspendLayout();
-            this.Enum.SuspendLayout();
+            this.Enums.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.Enum);
+            this.tabControl.Controls.Add(this.Enums);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -47,18 +47,18 @@
             this.tabControl.Size = new System.Drawing.Size(800, 450);
             this.tabControl.TabIndex = 0;
             // 
-            // Enum
+            // Enums
             // 
-            this.Enum.Controls.Add(this.IntValues);
-            this.Enum.Controls.Add(this.ValuesListBox);
-            this.Enum.Controls.Add(this.EnumListBox);
-            this.Enum.Location = new System.Drawing.Point(4, 22);
-            this.Enum.Name = "Enum";
-            this.Enum.Padding = new System.Windows.Forms.Padding(3);
-            this.Enum.Size = new System.Drawing.Size(792, 424);
-            this.Enum.TabIndex = 0;
-            this.Enum.Text = "Enums";
-            this.Enum.UseVisualStyleBackColor = true;
+            this.Enums.Controls.Add(this.IntValues);
+            this.Enums.Controls.Add(this.ValuesListBox);
+            this.Enums.Controls.Add(this.EnumListBox);
+            this.Enums.Location = new System.Drawing.Point(4, 22);
+            this.Enums.Name = "Enums";
+            this.Enums.Padding = new System.Windows.Forms.Padding(3);
+            this.Enums.Size = new System.Drawing.Size(792, 424);
+            this.Enums.TabIndex = 0;
+            this.Enums.Text = "Enums";
+            this.Enums.UseVisualStyleBackColor = true;
             // 
             // IntValues
             // 
@@ -93,8 +93,8 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.tabControl.ResumeLayout(false);
-            this.Enum.ResumeLayout(false);
-            this.Enum.PerformLayout();
+            this.Enums.ResumeLayout(false);
+            this.Enums.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -102,7 +102,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage Enum;
+        private System.Windows.Forms.TabPage Enums;
         private System.Windows.Forms.TextBox IntValues;
         private System.Windows.Forms.ListBox ValuesListBox;
         private System.Windows.Forms.ListBox EnumListBox;

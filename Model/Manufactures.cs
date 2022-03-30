@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Programming
 {
-    public enum Manufactires
+    public enum Manufactures
     {
         Samsung,
         Apple,

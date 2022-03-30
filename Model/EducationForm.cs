@@ -8,9 +8,9 @@ namespace Programming
 {
     public enum EducationForm
     {
-        fulltime,
-        parttime, 
-        evening,
-        remote
+        Fulltime,
+        Parttime, 
+        Evening,
+        Remote
     }
 }

@@ -16,19 +16,77 @@ namespace Programming
         public MainForm()
         {
             InitializeComponent();
+            EnumListBox.SelectedIndexChanged += EnumListBox_SelectedIndexChanged;
             FillEnumListBox();
-            EnumListBox.SetSelected(0,true);
         }
         private void EnumListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-           object select = EnumListBox.SelectedItem.ToString();
-           switch (select)
+           var select = EnumListBox.SelectedItem;
+           var type = (Model) select;
+           IntValues.Text = select.ToString();
+           switch (type)
            {
-               case Color:
-                   {
-
-                   }
-           }
+                case Model.Color:
+                    {
+                        ValuesListBox.Items.Clear();
+                        var colection = Enum.GetValues(typeof(Color));
+                        foreach (var thing in colection)
+                        {
+                            ValuesListBox.Items.Add(thing.ToString());
+                        }
+                        break;
+                    }
+                case Model.EducationForm:
+                    {
+                        ValuesListBox.Items.Clear();
+                        var colection = Enum.GetValues(typeof(EducationForm));
+                        foreach (var thing in colection)
+                        {
+                            ValuesListBox.Items.Add(thing.ToString());
+                        }
+                        break;
+                    }
+                case Model.Genre:
+                    {
+                        ValuesListBox.Items.Clear();
+                        var colection = Enum.GetValues(typeof(Genre));
+                        foreach (var thing in colection)
+                        {
+                            ValuesListBox.Items.Add(thing.ToString());
+                        }
+                        break;
+                    }
+                case Model.Manufactures:
+                    {
+                        ValuesListBox.Items.Clear();
+                        var colection = Enum.GetValues(typeof(Manufactures));
+                        foreach (var thing in colection)
+                        {
+                            ValuesListBox.Items.Add(thing.ToString());
+                        }
+                        break;
+                    }
+                case Model.Season:
+                    {
+                        ValuesListBox.Items.Clear();
+                        var colection = Enum.GetValues(typeof(Season));
+                        foreach (var thing in colection)
+                        {
+                            ValuesListBox.Items.Add(thing.ToString());
+                        }
+                        break;
+                    }
+                case Model.Weekday:
+                    {
+                        ValuesListBox.Items.Clear();
+                        var colection = Enum.GetValues(typeof(Weekday));
+                        foreach (var thing in colection)
+                        {
+                            ValuesListBox.Items.Add(thing.ToString());
+                        }
+                        break;
+                    }
+            }
         }
 
         private void IntValues_TextChanged(object sender, EventArgs e)
@@ -37,18 +95,22 @@ namespace Programming
         }
         private void FillEnumListBox()
         {
-            int ind = 0;
-            int i = 0;
-            string path = @"C:\Users\Danil\source\repos\Programming\Model";
-            string[] ENTRIES = Directory.GetFiles(path);
-            foreach (string e in ENTRIES)
-            {
-                ind = ENTRIES[i].Length - 3;
-                ENTRIES[i] = ENTRIES[i].Remove(ind);
-                ENTRIES[i] = ENTRIES[i].Remove(0, 46);
-                i++;
-            }
-            EnumListBox.Items.AddRange(ENTRIES);
+            EnumListBox.Items.Add(Model.Color);
+            EnumListBox.Items.Add(Model.EducationForm);
+            EnumListBox.Items.Add(Model.Genre);
+            EnumListBox.Items.Add(Model.Manufactures);
+            EnumListBox.Items.Add(Model.Season);
+            EnumListBox.Items.Add(Model.Weekday);
+            EnumListBox.SetSelected(0, true);
+        }
+        public enum Model
+        {
+            Color,
+            EducationForm,
+            Genre,
+            Manufactures,
+            Season,
+            Weekday
         }
     }
 }

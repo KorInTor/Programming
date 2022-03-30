@@ -8,11 +8,11 @@ namespace Programming
 {
     public enum Genre
     {
-        comedy, 
-        drama, 
-        thriller, 
-        action, 
-        horror, 
-        blockbuster
+        Comedy, 
+        Drama, 
+        Thriller, 
+        Action, 
+        Horror, 
+        Blockbuster
     }
 }
