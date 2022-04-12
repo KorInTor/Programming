@@ -17,13 +17,13 @@ namespace Programming
         {
             InitializeComponent();
             EnumListBox.SelectedIndexChanged += EnumListBox_SelectedIndexChanged;
-            FillEnumListBox();
+            ValuesListBox.SelectedIndexChanged += ValuesListBox_SelectedIndexChanged;
+            FillEnumsAndSeasons();
         }
         private void EnumListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
            var select = EnumListBox.SelectedItem;
            var type = (Model) select;
-           IntValues.Text = select.ToString();
            switch (type)
            {
                 case Model.Color:
@@ -32,7 +32,7 @@ namespace Programming
                         var colection = Enum.GetValues(typeof(Color));
                         foreach (var thing in colection)
                         {
-                            ValuesListBox.Items.Add(thing.ToString());
+                            ValuesListBox.Items.Add(thing);
                         }
                         break;
                     }
@@ -42,7 +42,7 @@ namespace Programming
                         var colection = Enum.GetValues(typeof(EducationForm));
                         foreach (var thing in colection)
                         {
-                            ValuesListBox.Items.Add(thing.ToString());
+                            ValuesListBox.Items.Add(thing);
                         }
                         break;
                     }
@@ -52,7 +52,7 @@ namespace Programming
                         var colection = Enum.GetValues(typeof(Genre));
                         foreach (var thing in colection)
                         {
-                            ValuesListBox.Items.Add(thing.ToString());
+                            ValuesListBox.Items.Add(thing);
                         }
                         break;
                     }
@@ -62,7 +62,7 @@ namespace Programming
                         var colection = Enum.GetValues(typeof(Manufactures));
                         foreach (var thing in colection)
                         {
-                            ValuesListBox.Items.Add(thing.ToString());
+                            ValuesListBox.Items.Add(thing);
                         }
                         break;
                     }
@@ -72,7 +72,7 @@ namespace Programming
                         var colection = Enum.GetValues(typeof(Season));
                         foreach (var thing in colection)
                         {
-                            ValuesListBox.Items.Add(thing.ToString());
+                            ValuesListBox.Items.Add(thing);
                         }
                         break;
                     }
@@ -82,26 +82,74 @@ namespace Programming
                         var colection = Enum.GetValues(typeof(Weekday));
                         foreach (var thing in colection)
                         {
-                            ValuesListBox.Items.Add(thing.ToString());
+                            ValuesListBox.Items.Add(thing);
                         }
                         break;
                     }
             }
         }
-
         private void IntValues_TextChanged(object sender, EventArgs e)
         {
 
         }
-        private void FillEnumListBox()
+        private void FillEnumsAndSeasons()
         {
-            EnumListBox.Items.Add(Model.Color);
-            EnumListBox.Items.Add(Model.EducationForm);
-            EnumListBox.Items.Add(Model.Genre);
-            EnumListBox.Items.Add(Model.Manufactures);
-            EnumListBox.Items.Add(Model.Season);
-            EnumListBox.Items.Add(Model.Weekday);
+            var colection = Enum.GetValues(typeof(Model));
+            foreach (var thing in colection)
+            {
+                EnumListBox.Items.Add(thing);
+            }
             EnumListBox.SetSelected(0, true);
+            colection = Enum.GetValues(typeof(Season));
+            foreach (var thing in colection)
+            {
+                SeasonCombobox.Items.Add(thing);
+            }
+        }
+        private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int x = (int)ValuesListBox.SelectedItem; 
+            IntValues.Text = x.ToString();
+        }
+        private void ParsingButton_Click(object sender, EventArgs e)
+        {
+            bool result = Enum.TryParse(ParsingTextBox.Text, out Weekday a);
+            if (result == true)
+            {
+            ParsingResult.Text = $"Это день недели ({Enum.Parse(typeof(Weekday), ParsingTextBox.Text)} = {(int)Enum.Parse(typeof(Weekday), ParsingTextBox.Text)})";
+            }
+            else
+            {
+                ParsingResult.Text = "Нет такого дня недели";
+            }
+        }
+        private void SeasonButton_Click(object sender, EventArgs e)
+        {
+            var select = SeasonCombobox.SelectedItem;
+            var type = (Season)select;
+            switch (type)
+            {
+                case Season.Autumn:
+                    {
+                        MessageBox.Show("Время собирать урожай!");
+                        break;
+                    }
+                case Season.Spring:
+                    {
+                        MessageBox.Show("Время сажать урожай!");
+                        break;
+                    }
+                case Season.Summer:
+                    {
+                        Enums.BackColor = ColorTranslator.FromHtml("#00fc2a");
+                        break;
+                    }
+                case Season.Winter:
+                    {
+                        Enums.BackColor = ColorTranslator.FromHtml("#00b5fc");
+                        break;
+                    }
+            }
         }
         public enum Model
         {
