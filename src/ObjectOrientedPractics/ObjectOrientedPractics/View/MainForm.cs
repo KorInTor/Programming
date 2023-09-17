@@ -1,8 +1,8 @@
 namespace ObjectOrientedPractics
 {
-    public partial class MainFOrm : Form
+    public partial class MainForm : Form
     {
-        public MainFOrm()
+        public MainForm()
         {
             InitializeComponent();
         }
