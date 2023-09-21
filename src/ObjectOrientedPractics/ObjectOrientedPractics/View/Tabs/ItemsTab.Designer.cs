@@ -42,13 +42,13 @@
             ItemsControlPanel = new Panel();
             ItemsListBox = new ListBox();
             ItemsLabel = new Label();
-            tableLayoutPanel2 = new TableLayoutPanel();
+            ButtonstableLayoutPanel = new TableLayoutPanel();
             AddItemButton = new Button();
             RemoveItemButton = new Button();
             tableLayoutPanel1.SuspendLayout();
             ItemsInfoPanel.SuspendLayout();
             ItemsControlPanel.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
+            ButtonstableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -187,7 +187,7 @@
             // 
             ItemsControlPanel.Controls.Add(ItemsListBox);
             ItemsControlPanel.Controls.Add(ItemsLabel);
-            ItemsControlPanel.Controls.Add(tableLayoutPanel2);
+            ItemsControlPanel.Controls.Add(ButtonstableLayoutPanel);
             ItemsControlPanel.Dock = DockStyle.Fill;
             ItemsControlPanel.Location = new Point(5, 3);
             ItemsControlPanel.Margin = new Padding(5, 3, 3, 3);
@@ -222,22 +222,22 @@
             ItemsLabel.TabIndex = 2;
             ItemsLabel.Text = "Items";
             // 
-            // tableLayoutPanel2
+            // ButtonstableLayoutPanel
             // 
-            tableLayoutPanel2.ColumnCount = 3;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel2.Controls.Add(AddItemButton, 0, 0);
-            tableLayoutPanel2.Controls.Add(RemoveItemButton, 1, 0);
-            tableLayoutPanel2.Dock = DockStyle.Bottom;
-            tableLayoutPanel2.Location = new Point(3, 532);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.Padding = new Padding(3);
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(376, 52);
-            tableLayoutPanel2.TabIndex = 0;
+            ButtonstableLayoutPanel.ColumnCount = 3;
+            ButtonstableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            ButtonstableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            ButtonstableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            ButtonstableLayoutPanel.Controls.Add(AddItemButton, 0, 0);
+            ButtonstableLayoutPanel.Controls.Add(RemoveItemButton, 1, 0);
+            ButtonstableLayoutPanel.Dock = DockStyle.Bottom;
+            ButtonstableLayoutPanel.Location = new Point(3, 532);
+            ButtonstableLayoutPanel.Name = "ButtonstableLayoutPanel";
+            ButtonstableLayoutPanel.Padding = new Padding(3);
+            ButtonstableLayoutPanel.RowCount = 1;
+            ButtonstableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            ButtonstableLayoutPanel.Size = new Size(376, 52);
+            ButtonstableLayoutPanel.TabIndex = 0;
             // 
             // AddItemButton
             // 
@@ -277,7 +277,7 @@
             ItemsInfoPanel.PerformLayout();
             ItemsControlPanel.ResumeLayout(false);
             ItemsControlPanel.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
+            ButtonstableLayoutPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -286,7 +286,7 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Panel ItemsInfoPanel;
         private Panel ItemsControlPanel;
-        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel ButtonstableLayoutPanel;
         private Button AddItemButton;
         private Button RemoveItemButton;
         private ListBox ItemsListBox;
