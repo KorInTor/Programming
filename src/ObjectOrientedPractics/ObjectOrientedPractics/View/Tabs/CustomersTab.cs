@@ -13,7 +13,7 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CustomersTab : UserControl
     {
-        List<Customer> _Customers = new();
+        List<Customer> _customers = new();
 
         private Customer _selectedCustomer = null;
 
@@ -22,16 +22,19 @@ namespace ObjectOrientedPractics.View.Tabs
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Сортировка списка <see cref="_customers"/> по свойству <see cref="Customer.Fullname"/>.
+        /// </summary>
         private void SortCustomersList()
         {
-            if (_Customers == null)
+            if (_customers == null)
             {
                 CustomersListBox.Items.Clear();
                 return;
             }
             CustomersListBox.Items.Clear();
-            _Customers.Sort((p1, p2) => p1.Fullname.CompareTo(p2.Fullname));
-            foreach (Customer Customer in _Customers)
+            _customers.Sort((p1, p2) => p1.Fullname.CompareTo(p2.Fullname));
+            foreach (Customer Customer in _customers)
             {
                 CustomersListBox.Items.Add($"{Customer.Fullname}");
             }
@@ -41,30 +44,36 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Обновление информации в TextBox'ax взятая из <see cref="_selectedCustomer"/>.
+        /// </summary>
         private void UpdateTextBoxesInfo()
         {
             if (CustomersListBox.SelectedIndex == -1)
             {
                 return;
             }
-            _selectedCustomer = _Customers[CustomersListBox.SelectedIndex];
+            _selectedCustomer = _customers[CustomersListBox.SelectedIndex];
 
             AddressTextBox.Text = _selectedCustomer.Address;
-            FullnameTextBox.Text = _selectedCustomer.Fullname.ToString();
+            FullnameTextBox.Text = _selectedCustomer.Fullname;
             IdTextBox.Text = _selectedCustomer.Id.ToString();
         }
 
-
+        /// <summary>
+        /// Поиск индекса покупателя в списке <see cref="_customers"/> с Id совпадающим c <see cref="_selectedCustomer"/>.
+        /// </summary>
+        /// <returns>Индекс элемента с совпадающим Id.</returns>
         private int FindCustomerById()
         {
-            int _index = _Customers.FindIndex(employee => employee.Id == _selectedCustomer.Id);
+            int _index = _customers.FindIndex(customer => customer.Id == _selectedCustomer.Id);
             return _index;
         }
 
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
             var blankCustomer = new Customer("ФИО", "ул.Пушкина дом Колотушкина");
-            _Customers.Add(blankCustomer);
+            _customers.Add(blankCustomer);
             SortCustomersList();
         }
 
@@ -77,7 +86,7 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTextBox.Clear();
             FullnameTextBox.Clear();
             AddressTextBox.Clear();
-            _Customers.RemoveAt(CustomersListBox.SelectedIndex);
+            _customers.RemoveAt(CustomersListBox.SelectedIndex);
             _selectedCustomer = null;
             SortCustomersList();
         }
@@ -97,7 +106,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 FullnameTextBox.BackColor = Color.White;
                 _selectedCustomer.Fullname = FullnameTextBox.Text;
-                _Customers[FindCustomerById()].Fullname = _selectedCustomer.Fullname;
+                _customers[FindCustomerById()].Fullname = _selectedCustomer.Fullname;
             }
             catch (Exception exception)
             {
@@ -116,7 +125,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 AddressTextBox.BackColor = Color.White;
                 _selectedCustomer.Address = AddressTextBox.Text;
-                _Customers[FindCustomerById()].Address = _selectedCustomer.Address;
+                _customers[FindCustomerById()].Address = _selectedCustomer.Address;
                 SortCustomersList();
             }
             catch (Exception exception)

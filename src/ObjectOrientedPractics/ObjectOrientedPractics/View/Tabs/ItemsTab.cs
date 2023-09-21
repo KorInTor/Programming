@@ -22,6 +22,9 @@ namespace ObjectOrientedPractics.View.Tabs
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Сортировка списка <see cref="_items"/> по свойству <see cref="Item.Name"/>.
+        /// </summary>
         private void SortItemsList()
         {
             if (_items == null)
@@ -41,6 +44,9 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Обновление информации в TextBox'ax взятая из <see cref="_selectedItem"/>.
+        /// </summary>
         private void UpdateTextBoxesInfo()
         {
             if (ItemsListBox.SelectedIndex == -1)
@@ -55,10 +61,13 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTextBox.Text = _selectedItem.Id.ToString();
         }
 
-
+        /// <summary>
+        /// Поиск индекса предмета в списке <see cref="_items"/> с Id совпадающим c <see cref="_selectedItem"/>.
+        /// </summary>
+        /// <returns>Индекс элемента с совпадающим Id.</returns>
         private int FindItemById()
         {
-            int _index = _items.FindIndex(employee => employee.Id == _selectedItem.Id);
+            int _index = _items.FindIndex(item => item.Id == _selectedItem.Id);
             return _index;
         }
 
