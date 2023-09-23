@@ -24,6 +24,22 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
+        /// Возвращает и задаёт список покупателей. После получения списка, соритрует <see cref="CustomersListBox"/>.
+        /// </summary>
+        public List<Customer> Customers
+        {
+            get
+            {
+                return _customers;
+            }
+            set
+            {
+                _customers = value;
+                SortCustomersList();
+            }
+        }
+
+        /// <summary>
         /// Сортировка списка <see cref="_customers"/> по свойству <see cref="Customer.Fullname"/>.
         /// </summary>
         private void SortCustomersList()

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Хранит информацию о покупателе.
+    /// </summary>
     public class Customer
     {
         private int _id;

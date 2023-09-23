@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Хранит ифнормацию о товаре.
+    /// </summary>
     public class Item
     {
         /// <summary>

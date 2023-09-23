@@ -24,6 +24,22 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
+        /// Возраващет и задаёт список товаров.После получения списка, соритрует <see cref="ItemsListBox"/>.
+        /// </summary>
+        public List<Item> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                _items = value;
+                SortItemsList();
+            }
+        }
+
+        /// <summary>
         /// Сортировка списка <see cref="_items"/> по свойству <see cref="Item.Name"/>.
         /// </summary>
         private void SortItemsList()

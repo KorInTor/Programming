@@ -87,7 +87,7 @@
             address1.Building = "";
             address1.City = "";
             address1.Country = "";
-            address1.Index = 0;
+            address1.Index = 111111;
             address1.Street = "";
             AddressControl.Address = address1;
             AddressControl.Location = new Point(0, 111);
