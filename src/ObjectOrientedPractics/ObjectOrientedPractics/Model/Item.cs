@@ -9,13 +9,26 @@ namespace ObjectOrientedPractics.Model
 {
     public class Item
     {
+        /// <summary>
+        /// Закрытое поле данного класса, хранит уникальный идентификатор.
+        /// </summary>
         private int _id;
 
+        /// <summary>
+        /// Закрытое поле данного класса, хранит Имя продукта.
+        /// </summary>
         private string _name;
 
+        /// <summary>
+        /// Закрытое поле данного класса, хранит Описание продукта.
+        /// </summary>
         private string _info;
 
+        /// <summary>
+        /// Закрытое поле данного класса, хранит Стоимость продукта.
+        /// </summary>
         private double _cost;
+
 
         /// <summary>
         /// Возвращает уникальный идентификатор товара.
@@ -29,7 +42,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё наименование товара. Должен быть не более 200 символов.
+        /// Возвращает и задаёт наименование товара. Должен быть не более 200 символов.
         /// </summary>
         public string Name 
         {
@@ -45,7 +58,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё описание товара. Должен быть не более 1000 символов.
+        /// Возвращает и задаёт описание товара. Должен быть не более 1000 символов.
         /// </summary>
         public string Info
         {
@@ -61,7 +74,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё цену товара. Должен быть в пределах от 0 до 100000 символов.
+        /// Возвращает и задаёт цену товара. Должен быть в пределах от 0 до 100000 символов.
         /// </summary>
         public double Cost
         {
@@ -77,16 +90,23 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Создает новый экземпляр класса <see cref="Item"/> с заданными значениями имени, информации и стоимости.
+        /// Возвращает и задёт категорию товара.
+        /// </summary>
+        public Category Category { get; set; }
+
+        /// <summary>
+        /// Создает новый экземпляр класса <see cref="Item"/> с заданными значениями имени, информации, стоимости и категории.
         /// </summary>
         /// <param name="name">Имя товара.</param>
         /// <param name="info">Информация о товаре.</param>
         /// <param name="cost">Стоимость товара.</param>
-        public Item(string name, string info, double cost)
+        /// <param name="category">Категория товара</param>
+        public Item(string name, string info, double cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
             _id = IdGenerator.GetNextId();
         }
     }

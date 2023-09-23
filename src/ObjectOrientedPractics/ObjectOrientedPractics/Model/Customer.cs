@@ -13,7 +13,7 @@ namespace ObjectOrientedPractics.Model
 
         private string _fullname;
 
-        private string _address;
+        private Address _address;
 
         /// <summary>
         /// Возвращает уникальный идентификатор покупателя.
@@ -43,9 +43,9 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё адрес покупателя. Должен быть не более 500 символов.
+        /// Возвращает и задаё адрес покупателя. Тип <see cref="Model.Address"/>.
         /// </summary>
-        public string Address
+        public Address Address
         {
             get
             {
@@ -53,7 +53,6 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 500, "Address");
                 _address = value;
             }
         }
@@ -63,7 +62,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullname">Полное имя покупателя.</param>
         /// <param name="address">Адрес покупателя.</param>
-        public Customer(string fullname, string address)
+        public Customer(string fullname, Address address)
         {
             Fullname = fullname;
             Address = address;
