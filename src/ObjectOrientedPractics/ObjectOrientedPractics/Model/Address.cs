@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Хранит информацию о адрессе.
+    /// </summary>
     public class Address
     {
         /// <summary>
