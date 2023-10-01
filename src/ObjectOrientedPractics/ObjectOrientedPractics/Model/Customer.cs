@@ -28,6 +28,26 @@ namespace ObjectOrientedPractics.Model
         private Address _address;
 
         /// <summary>
+        /// Хранит корзину покупателя.
+        /// </summary>
+        private Cart _cart;
+
+        /// <summary>
+        /// Возвращает и задаёт корзину покупателя.
+        /// </summary>
+        public Cart Cart
+        {
+            get 
+            { 
+                return _cart; 
+            }
+            set 
+            { 
+                _cart = value; 
+            }
+        }
+
+        /// <summary>
         /// Возвращает уникальный идентификатор покупателя.
         /// </summary>
         public int Id 
