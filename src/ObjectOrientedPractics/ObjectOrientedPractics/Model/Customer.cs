@@ -28,9 +28,29 @@ namespace ObjectOrientedPractics.Model
         private Address _address;
 
         /// <summary>
-        /// Хранит корзину покупателя.
+        /// Корзина покупателя.
         /// </summary>
         private Cart _cart;
+
+        /// <summary>
+        /// Список заказов.
+        /// </summary>
+        private List<Order> _orders;
+
+        /// <summary>
+        /// Возвращает и задаёт список заказов покупателя.
+        /// </summary>
+        public List<Order> Orders
+        { 
+            get 
+            { 
+                return _orders; 
+            } 
+            set 
+            { 
+                _orders = value; 
+            } 
+        }
 
         /// <summary>
         /// Возвращает и задаёт корзину покупателя.
@@ -100,6 +120,7 @@ namespace ObjectOrientedPractics.Model
             Address = address;
             _id = IdGenerator.GetNextId();
             Cart = new Cart();
+            Orders = new List<Order>();
         }
 
     }
