@@ -7,6 +7,9 @@ using System.Xml.Linq;
 
 namespace ObjectOrientedPractics.Service
 {
+    /// <summary>
+    /// Хранит методы для проверки значений.
+    /// </summary>
     static class ValueValidator
     {
         /// <summary>

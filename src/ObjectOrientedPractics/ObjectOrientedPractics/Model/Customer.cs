@@ -12,10 +12,19 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Customer
     {
+        /// <summary>
+        /// Уникальный идентификатор данного класса.
+        /// </summary>
         private int _id;
 
+        /// <summary>
+        /// Полное имя.
+        /// </summary>
         private string _fullname;
 
+        /// <summary>
+        /// Данные адреса.
+        /// </summary>
         private Address _address;
 
         /// <summary>
@@ -46,7 +55,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё адрес покупателя. Тип <see cref="Model.Address"/>.
+        /// Возвращает и задаё адрес покупателя.
         /// </summary>
         public Address Address
         {
@@ -61,9 +70,9 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Создает новый экземпляр класса Customer с заданным именем и адресом.
+        /// Создает новый экземпляр класса <see cref="Customer"/>
         /// </summary>
-        /// <param name="fullname">Полное имя покупателя.</param>
+        /// <param name="fullname">Полное имя покупателя. Должен быть не более 200 символов.</param>
         /// <param name="address">Адрес покупателя.</param>
         public Customer(string fullname, Address address)
         {

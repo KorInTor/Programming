@@ -13,32 +13,32 @@ namespace ObjectOrientedPractics.Model
     public class Address
     {
         /// <summary>
-        /// Закрытое поле данного класса, хранит индекс.
+        /// Уникальный идентификатор данного класса.
         /// </summary>
         private int _index;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит наименование страны.
+        /// Наименование страны.
         /// </summary>
         private string _country;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит наименование города.
+        /// Наименование города.
         /// </summary>
         private string _city;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит наименование улицы.
+        /// Наименование улицы.
         /// </summary>
         private string _street;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит номер дома.
+        /// Номер дома.
         /// </summary>
         private string _building;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит нмоер квартиры.
+        /// Номер квартиры.
         /// </summary>
         private string _apartment;
 
@@ -139,14 +139,14 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Создает новый экземпляр класса <see cref="Address"/> с заданными значениями.
+        /// Создает новый экземпляр класса <see cref="Address"/>.
         /// </summary>
-        /// <param name="index">Индекс.</param>
-        /// <param name="country">Страна.</param>
-        /// <param name="city">Город.</param>
-        /// <param name="street">Улица.</param>
-        /// <param name="building">Номер дома.</param>
-        /// <param name="apartment">Номер квартиры/помещения.</param>
+        /// <param name="index">Индекс. Должен быть шестизначным.</param>
+        /// <param name="country">Страна. Должен быть не более 50 символов.</param>
+        /// <param name="city">Город. Должен быть не более 50 символов.</param>
+        /// <param name="street">Улица. Должен быть не более 50 символов.</param>
+        /// <param name="building">Номер дома. Должен быть не более 10 символов.</param>
+        /// <param name="apartment">Номер квартиры/помещения. Должен быть не более 10 символов.</param>
         public Address(int index, string country, string city, string street, string building, string apartment)
         {
             Index = index;

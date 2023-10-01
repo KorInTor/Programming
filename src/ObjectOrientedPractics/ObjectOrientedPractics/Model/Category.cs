@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ObjectOrientedPractics.Model
 {
     /// <summary>
-    /// Открытое перечисление, хранит наименование категорий товара.
+    /// Хранит наименование категорий товара.
     /// </summary>
     public enum Category
     {

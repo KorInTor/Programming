@@ -13,22 +13,22 @@ namespace ObjectOrientedPractics.Model
     public class Item
     {
         /// <summary>
-        /// Закрытое поле данного класса, хранит уникальный идентификатор.
+        /// Хранит уникальный идентификатор.
         /// </summary>
         private int _id;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит Имя продукта.
+        /// Наименование товара.
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит Описание продукта.
+        /// Описание товара.
         /// </summary>
         private string _info;
 
         /// <summary>
-        /// Закрытое поле данного класса, хранит Стоимость продукта.
+        /// Стоимость товара.
         /// </summary>
         private double _cost;
 
@@ -98,12 +98,12 @@ namespace ObjectOrientedPractics.Model
         public Category Category { get; set; }
 
         /// <summary>
-        /// Создает новый экземпляр класса <see cref="Item"/> с заданными значениями имени, информации, стоимости и категории.
+        /// Создает новый экземпляр класса <see cref="Item"/>.
         /// </summary>
-        /// <param name="name">Имя товара.</param>
-        /// <param name="info">Информация о товаре.</param>
-        /// <param name="cost">Стоимость товара.</param>
-        /// <param name="category">Категория товара</param>
+        /// <param name="name">Имя товара. Должно быть не более 200 символов.</param>
+        /// <param name="info">Информация о товаре. Должна быть не более 1000 символов.</param>
+        /// <param name="cost">Стоимость товара. Должна быть в пределах от 0 до 100000 символов.</param>
+        /// <param name="category">Категория товара. Одно из значение <see cref="Model.Category"/>.</param>
         public Item(string name, string info, double cost, Category category)
         {
             Name = name;
