@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
+            Model.Address address1 = new Model.Address();
+            TableLayoutPanel = new TableLayoutPanel();
             CustomersInfoPanel = new Panel();
-            AddressTextBox = new TextBox();
+            AddressControl = new Controls.AddressControl();
             IdTextBox = new TextBox();
             FullnameTextBox = new TextBox();
-            AddressLabel = new Label();
             FullNameLabel = new Label();
             IdLabel = new Label();
             SelectedCustomerLabel = new Label();
@@ -43,35 +43,34 @@
             buttonsTableLayoutPanel = new TableLayoutPanel();
             AddCustomerButton = new Button();
             RemoveCustomerButton = new Button();
-            tableLayoutPanel1.SuspendLayout();
+            TableLayoutPanel.SuspendLayout();
             CustomersInfoPanel.SuspendLayout();
             CustomersControlPanel.SuspendLayout();
             buttonsTableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // TableLayoutPanel
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44.7524757F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55.2475243F));
-            tableLayoutPanel1.Controls.Add(CustomersInfoPanel, 1, 0);
-            tableLayoutPanel1.Controls.Add(CustomersControlPanel, 0, 0);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.MinimumSize = new Size(500, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(873, 593);
-            tableLayoutPanel1.TabIndex = 0;
+            TableLayoutPanel.ColumnCount = 2;
+            TableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44.7524757F));
+            TableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55.2475243F));
+            TableLayoutPanel.Controls.Add(CustomersInfoPanel, 1, 0);
+            TableLayoutPanel.Controls.Add(CustomersControlPanel, 0, 0);
+            TableLayoutPanel.Dock = DockStyle.Fill;
+            TableLayoutPanel.Location = new Point(0, 0);
+            TableLayoutPanel.MinimumSize = new Size(500, 0);
+            TableLayoutPanel.Name = "TableLayoutPanel";
+            TableLayoutPanel.RowCount = 1;
+            TableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            TableLayoutPanel.Size = new Size(873, 593);
+            TableLayoutPanel.TabIndex = 0;
             // 
             // CustomersInfoPanel
             // 
             CustomersInfoPanel.BackColor = SystemColors.Window;
-            CustomersInfoPanel.Controls.Add(AddressTextBox);
+            CustomersInfoPanel.Controls.Add(AddressControl);
             CustomersInfoPanel.Controls.Add(IdTextBox);
             CustomersInfoPanel.Controls.Add(FullnameTextBox);
-            CustomersInfoPanel.Controls.Add(AddressLabel);
             CustomersInfoPanel.Controls.Add(FullNameLabel);
             CustomersInfoPanel.Controls.Add(IdLabel);
             CustomersInfoPanel.Controls.Add(SelectedCustomerLabel);
@@ -82,15 +81,19 @@
             CustomersInfoPanel.Size = new Size(477, 587);
             CustomersInfoPanel.TabIndex = 0;
             // 
-            // AddressTextBox
+            // AddressControl
             // 
-            AddressTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            AddressTextBox.Location = new Point(76, 101);
-            AddressTextBox.Multiline = true;
-            AddressTextBox.Name = "AddressTextBox";
-            AddressTextBox.Size = new Size(395, 170);
-            AddressTextBox.TabIndex = 10;
-            AddressTextBox.TextChanged += AddressTextBox_TextChanged;
+            address1.Apartment = "";
+            address1.Building = "";
+            address1.City = "";
+            address1.Country = "";
+            address1.Index = 111111;
+            address1.Street = "";
+            AddressControl.Address = address1;
+            AddressControl.Location = new Point(0, 111);
+            AddressControl.Name = "AddressControl";
+            AddressControl.Size = new Size(474, 150);
+            AddressControl.TabIndex = 11;
             // 
             // IdTextBox
             // 
@@ -108,18 +111,6 @@
             FullnameTextBox.Size = new Size(395, 23);
             FullnameTextBox.TabIndex = 8;
             FullnameTextBox.TextChanged += FullnameTextBox_TextChanged;
-            // 
-            // AddressLabel
-            // 
-            AddressLabel.AutoSize = true;
-            AddressLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            AddressLabel.Location = new Point(0, 99);
-            AddressLabel.Margin = new Padding(3);
-            AddressLabel.Name = "AddressLabel";
-            AddressLabel.Padding = new Padding(3);
-            AddressLabel.Size = new Size(58, 21);
-            AddressLabel.TabIndex = 6;
-            AddressLabel.Text = "Address:";
             // 
             // FullNameLabel
             // 
@@ -244,10 +235,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(TableLayoutPanel);
             Name = "CustomersTab";
             Size = new Size(873, 593);
-            tableLayoutPanel1.ResumeLayout(false);
+            TableLayoutPanel.ResumeLayout(false);
             CustomersInfoPanel.ResumeLayout(false);
             CustomersInfoPanel.PerformLayout();
             CustomersControlPanel.ResumeLayout(false);
@@ -258,7 +249,7 @@
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel TableLayoutPanel;
         private Panel CustomersInfoPanel;
         private Panel CustomersControlPanel;
         private TableLayoutPanel buttonsTableLayoutPanel;
@@ -269,9 +260,8 @@
         private Label FullNameLabel;
         private Label IdLabel;
         private Label SelectedCustomerLabel;
-        private TextBox AddressTextBox;
         private TextBox IdTextBox;
         private TextBox FullnameTextBox;
-        private Label AddressLabel;
+        private Controls.AddressControl AddressControl;
     }
 }

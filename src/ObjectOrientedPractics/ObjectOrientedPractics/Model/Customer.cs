@@ -7,13 +7,25 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Хранит информацию о покупателе.
+    /// </summary>
     public class Customer
     {
+        /// <summary>
+        /// Уникальный идентификатор данного класса.
+        /// </summary>
         private int _id;
 
+        /// <summary>
+        /// Полное имя.
+        /// </summary>
         private string _fullname;
 
-        private string _address;
+        /// <summary>
+        /// Данные адреса.
+        /// </summary>
+        private Address _address;
 
         /// <summary>
         /// Возвращает уникальный идентификатор покупателя.
@@ -43,9 +55,9 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё адрес покупателя. Должен быть не более 500 символов.
+        /// Возвращает и задаё адрес покупателя.
         /// </summary>
-        public string Address
+        public Address Address
         {
             get
             {
@@ -53,17 +65,16 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 500, "Address");
                 _address = value;
             }
         }
 
         /// <summary>
-        /// Создает новый экземпляр класса Customer с заданным именем и адресом.
+        /// Создает новый экземпляр класса <see cref="Customer"/>
         /// </summary>
-        /// <param name="fullname">Полное имя покупателя.</param>
+        /// <param name="fullname">Полное имя покупателя. Должен быть не более 200 символов.</param>
         /// <param name="address">Адрес покупателя.</param>
-        public Customer(string fullname, string address)
+        public Customer(string fullname, Address address)
         {
             Fullname = fullname;
             Address = address;

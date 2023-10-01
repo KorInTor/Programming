@@ -20,6 +20,23 @@ namespace ObjectOrientedPractics.View.Tabs
         public ItemsTab()
         {
             InitializeComponent();
+            InitCategoryComboBox();
+        }
+
+        /// <summary>
+        /// Возраващет и задаёт список товаров.После получения списка, соритрует <see cref="ItemsListBox"/>.
+        /// </summary>
+        public List<Item> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                _items = value;
+                SortItemsList();
+            }
         }
 
         /// <summary>
@@ -45,7 +62,7 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
-        /// Обновление информации в TextBox'ax взятая из <see cref="_selectedItem"/>.
+        /// Обновление информации в Полях информации взятая из <see cref="_selectedItem"/>.
         /// </summary>
         private void UpdateTextBoxesInfo()
         {
@@ -59,6 +76,7 @@ namespace ObjectOrientedPractics.View.Tabs
             CostTextBox.Text = _selectedItem.Cost.ToString();
             DescriptionTextBox.Text = _selectedItem.Info;
             IdTextBox.Text = _selectedItem.Id.ToString();
+            CategoryComboBox.SelectedItem = _selectedItem.Category;
         }
 
         /// <summary>
@@ -71,9 +89,20 @@ namespace ObjectOrientedPractics.View.Tabs
             return _index;
         }
 
+        /// <summary>
+        /// Заполнение CategoryComboBox значениями из <see cref="Category"/>
+        /// </summary>
+        private void InitCategoryComboBox()
+        {
+            foreach (var season in Enum.GetValues(typeof(Category)))
+            {
+                CategoryComboBox.Items.Add(season);
+            }
+        }
+
         private void AddItemButton_Click(object sender, EventArgs e)
         {
-            var blankItem = new Item("Наименование", "Описание", 1);
+            var blankItem = new Item("Наименование", "Описание", 1, Category.Accessory);
             _items.Add(blankItem);
             SortItemsList();
         }
@@ -88,6 +117,7 @@ namespace ObjectOrientedPractics.View.Tabs
             CostTextBox.Clear();
             DescriptionTextBox.Clear();
             NameTextBox.Clear();
+            CategoryComboBox.SelectedItem = null;
             _items.RemoveAt(ItemsListBox.SelectedIndex);
             _selectedItem = null;
             SortItemsList();
@@ -151,6 +181,16 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 DescriptionTextBox.BackColor = Color.LightPink;
             }
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_selectedItem == null)
+            {
+                return;
+            }
+            _selectedItem.Category = (Category)CategoryComboBox.SelectedItem;
+            _items[FindItemById()].Category = _selectedItem.Category;
         }
     }
 }

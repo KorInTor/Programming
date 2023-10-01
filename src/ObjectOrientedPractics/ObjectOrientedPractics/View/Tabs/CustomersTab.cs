@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.Tabs.Controls;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -20,6 +21,22 @@ namespace ObjectOrientedPractics.View.Tabs
         public CustomersTab()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Возвращает и задаёт список покупателей. После получения списка, соритрует <see cref="CustomersListBox"/>.
+        /// </summary>
+        public List<Customer> Customers
+        {
+            get
+            {
+                return _customers;
+            }
+            set
+            {
+                _customers = value;
+                SortCustomersList();
+            }
         }
 
         /// <summary>
@@ -55,7 +72,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             _selectedCustomer = _customers[CustomersListBox.SelectedIndex];
 
-            AddressTextBox.Text = _selectedCustomer.Address;
+            AddressControl.Address = _selectedCustomer.Address;
             FullnameTextBox.Text = _selectedCustomer.Fullname;
             IdTextBox.Text = _selectedCustomer.Id.ToString();
         }
@@ -72,7 +89,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
-            var blankCustomer = new Customer("ФИО", "ул.Пушкина дом Колотушкина");
+            var blankCustomer = new Customer("ФИО", new Address());
             _customers.Add(blankCustomer);
             SortCustomersList();
         }
@@ -85,7 +102,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             IdTextBox.Clear();
             FullnameTextBox.Clear();
-            AddressTextBox.Clear();
+            AddressControl.Clear();
             _customers.RemoveAt(CustomersListBox.SelectedIndex);
             _selectedCustomer = null;
             SortCustomersList();
@@ -113,25 +130,6 @@ namespace ObjectOrientedPractics.View.Tabs
                 FullnameTextBox.BackColor = Color.LightPink;
             }
             SortCustomersList();
-        }
-
-        private void AddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (_selectedCustomer == null)
-            {
-                return;
-            }
-            try
-            {
-                AddressTextBox.BackColor = Color.White;
-                _selectedCustomer.Address = AddressTextBox.Text;
-                _customers[FindCustomerById()].Address = _selectedCustomer.Address;
-                SortCustomersList();
-            }
-            catch (Exception exception)
-            {
-                AddressTextBox.BackColor = Color.LightPink;
-            }
         }
     }
 }

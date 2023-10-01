@@ -7,15 +7,31 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Хранит ифнормацию о товаре.
+    /// </summary>
     public class Item
     {
+        /// <summary>
+        /// Хранит уникальный идентификатор.
+        /// </summary>
         private int _id;
 
+        /// <summary>
+        /// Наименование товара.
+        /// </summary>
         private string _name;
 
+        /// <summary>
+        /// Описание товара.
+        /// </summary>
         private string _info;
 
+        /// <summary>
+        /// Стоимость товара.
+        /// </summary>
         private double _cost;
+
 
         /// <summary>
         /// Возвращает уникальный идентификатор товара.
@@ -29,7 +45,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё наименование товара. Должен быть не более 200 символов.
+        /// Возвращает и задаёт наименование товара. Должен быть не более 200 символов.
         /// </summary>
         public string Name 
         {
@@ -45,7 +61,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё описание товара. Должен быть не более 1000 символов.
+        /// Возвращает и задаёт описание товара. Должен быть не более 1000 символов.
         /// </summary>
         public string Info
         {
@@ -61,7 +77,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаё цену товара. Должен быть в пределах от 0 до 100000 символов.
+        /// Возвращает и задаёт цену товара. Должен быть в пределах от 0 до 100000 символов.
         /// </summary>
         public double Cost
         {
@@ -77,16 +93,23 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Создает новый экземпляр класса <see cref="Item"/> с заданными значениями имени, информации и стоимости.
+        /// Возвращает и задёт категорию товара.
         /// </summary>
-        /// <param name="name">Имя товара.</param>
-        /// <param name="info">Информация о товаре.</param>
-        /// <param name="cost">Стоимость товара.</param>
-        public Item(string name, string info, double cost)
+        public Category Category { get; set; }
+
+        /// <summary>
+        /// Создает новый экземпляр класса <see cref="Item"/>.
+        /// </summary>
+        /// <param name="name">Имя товара. Должно быть не более 200 символов.</param>
+        /// <param name="info">Информация о товаре. Должна быть не более 1000 символов.</param>
+        /// <param name="cost">Стоимость товара. Должна быть в пределах от 0 до 100000 символов.</param>
+        /// <param name="category">Категория товара. Одно из значение <see cref="Model.Category"/>.</param>
+        public Item(string name, string info, double cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
             _id = IdGenerator.GetNextId();
         }
     }

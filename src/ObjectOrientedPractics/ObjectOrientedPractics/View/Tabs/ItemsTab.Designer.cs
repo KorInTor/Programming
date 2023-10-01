@@ -30,6 +30,8 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             ItemsInfoPanel = new Panel();
+            CategoryComboBox = new ComboBox();
+            CategoryLabel = new Label();
             DescriptionTextBox = new TextBox();
             NameTextBox = new TextBox();
             IdTextBox = new TextBox();
@@ -70,6 +72,8 @@
             // ItemsInfoPanel
             // 
             ItemsInfoPanel.BackColor = SystemColors.Window;
+            ItemsInfoPanel.Controls.Add(CategoryComboBox);
+            ItemsInfoPanel.Controls.Add(CategoryLabel);
             ItemsInfoPanel.Controls.Add(DescriptionTextBox);
             ItemsInfoPanel.Controls.Add(NameTextBox);
             ItemsInfoPanel.Controls.Add(IdTextBox);
@@ -86,6 +90,27 @@
             ItemsInfoPanel.Size = new Size(477, 587);
             ItemsInfoPanel.TabIndex = 0;
             // 
+            // CategoryComboBox
+            // 
+            CategoryComboBox.FormattingEnabled = true;
+            CategoryComboBox.Location = new Point(72, 101);
+            CategoryComboBox.Name = "CategoryComboBox";
+            CategoryComboBox.Size = new Size(191, 23);
+            CategoryComboBox.TabIndex = 13;
+            CategoryComboBox.SelectedIndexChanged += CategoryComboBox_SelectedIndexChanged;
+            // 
+            // CategoryLabel
+            // 
+            CategoryLabel.AutoSize = true;
+            CategoryLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            CategoryLabel.Location = new Point(0, 101);
+            CategoryLabel.Margin = new Padding(3);
+            CategoryLabel.Name = "CategoryLabel";
+            CategoryLabel.Padding = new Padding(3);
+            CategoryLabel.Size = new Size(67, 21);
+            CategoryLabel.TabIndex = 12;
+            CategoryLabel.Text = "Category: ";
+            // 
             // DescriptionTextBox
             // 
             DescriptionTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -99,16 +124,16 @@
             // NameTextBox
             // 
             NameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            NameTextBox.Location = new Point(6, 150);
+            NameTextBox.Location = new Point(6, 172);
             NameTextBox.Multiline = true;
             NameTextBox.Name = "NameTextBox";
-            NameTextBox.Size = new Size(465, 121);
+            NameTextBox.Size = new Size(465, 99);
             NameTextBox.TabIndex = 10;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
             // 
             // IdTextBox
             // 
-            IdTextBox.Location = new Point(48, 40);
+            IdTextBox.Location = new Point(72, 40);
             IdTextBox.Name = "IdTextBox";
             IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(104, 23);
@@ -116,7 +141,7 @@
             // 
             // CostTextBox
             // 
-            CostTextBox.Location = new Point(48, 72);
+            CostTextBox.Location = new Point(72, 70);
             CostTextBox.Name = "CostTextBox";
             CostTextBox.Size = new Size(104, 23);
             CostTextBox.TabIndex = 8;
@@ -138,7 +163,7 @@
             // 
             NameLabel.AutoSize = true;
             NameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            NameLabel.Location = new Point(0, 123);
+            NameLabel.Location = new Point(0, 145);
             NameLabel.Margin = new Padding(3);
             NameLabel.Name = "NameLabel";
             NameLabel.Padding = new Padding(3);
@@ -150,7 +175,7 @@
             // 
             CostLabel.AutoSize = true;
             CostLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            CostLabel.Location = new Point(0, 72);
+            CostLabel.Location = new Point(0, 70);
             CostLabel.Margin = new Padding(3);
             CostLabel.Name = "CostLabel";
             CostLabel.Padding = new Padding(3);
@@ -300,5 +325,7 @@
         private Label DescriptionLabel;
         private Label NameLabel;
         private TextBox DescriptionTextBox;
+        private ComboBox CategoryComboBox;
+        private Label CategoryLabel;
     }
 }
