@@ -99,6 +99,7 @@ namespace ObjectOrientedPractics.Model
             Fullname = fullname;
             Address = address;
             _id = IdGenerator.GetNextId();
+            Cart = new Cart();
         }
 
     }
