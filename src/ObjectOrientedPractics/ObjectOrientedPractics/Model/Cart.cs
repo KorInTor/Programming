@@ -50,5 +50,13 @@ namespace ObjectOrientedPractics.Model
                 _items = value;
             }
         }
+
+        /// <summary>
+        /// Конструктор по умолчанию.
+        /// </summary>
+        public Cart()
+        {
+            _items = new List<Item>();
+        }
     }
 }

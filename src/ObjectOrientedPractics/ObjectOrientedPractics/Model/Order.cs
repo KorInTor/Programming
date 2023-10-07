@@ -28,6 +28,11 @@ namespace ObjectOrientedPractics.Model
         private Address _address;
 
         /// <summary>
+        /// Статус заказа.
+        /// </summary>
+        private OrderStatus _status;
+
+        /// <summary>
         /// Список товаров в заказе.
         /// </summary>
         private List<Item> _items;
@@ -88,6 +93,21 @@ namespace ObjectOrientedPractics.Model
                 _address = value;
             }
         }
+        
+        /// <summary>
+        /// Возвращает и задаёт статус заказа.
+        /// </summary>
+        public OrderStatus Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задаёт список товаров в заказе.
@@ -120,6 +140,7 @@ namespace ObjectOrientedPractics.Model
             Items = items;
             _id = IdGenerator.GetNextId();
             _date = DateOnly.FromDateTime(DateTime.Now);
+            _status = OrderStatus.New;
         }
     }
 }

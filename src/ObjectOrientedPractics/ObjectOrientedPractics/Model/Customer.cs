@@ -123,5 +123,9 @@ namespace ObjectOrientedPractics.Model
             Orders = new List<Order>();
         }
 
+        /// <summary>
+        /// Конструктор по умолчанию.
+        /// </summary>
+        public Customer() { }
     }
 }
