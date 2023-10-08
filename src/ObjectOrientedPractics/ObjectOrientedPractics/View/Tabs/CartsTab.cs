@@ -15,13 +15,24 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CartsTab : UserControl
     {
-
+        /// <summary>
+        /// Товары для добавления в корзину.
+        /// </summary>
         private List<Item> _items = new List<Item>();
 
+        /// <summary>
+        /// Покупатели для работы с корзиной.
+        /// </summary>
         private List<Customer> _customers = new List<Customer>();
 
+        /// <summary>
+        /// Поле для работы с покупателем.
+        /// </summary>
         private Customer CurrentCustomer { get; set; } = new Customer();
 
+        /// <summary>
+        /// Вовзращает и задёт список покупателей в <see cref="CartsTab"/>
+        /// </summary>
         public List<Customer> Customers
         {
             get
@@ -34,6 +45,9 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Вовзращает и задёт список товаров в <see cref="CartsTab"/>
+        /// </summary>
         public List<Item> Items
         {
             get
@@ -53,6 +67,9 @@ namespace ObjectOrientedPractics.View.Tabs
             InitCustomerComboBox();
         }
 
+        /// <summary>
+        /// Обновляет списки товаров и покупателей.
+        /// </summary>
         public void RefreshData()
         {
             CurrentCustomer = new Customer();
@@ -60,6 +77,7 @@ namespace ObjectOrientedPractics.View.Tabs
             InitCustomerComboBox();
             InitCartContent();
         }
+
         /// <summary>
         /// Заполняет список <see cref="ItemsListBox"/> значениями из <see cref="Items"/>.
         /// </summary>

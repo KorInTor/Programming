@@ -157,6 +157,18 @@ namespace ObjectOrientedPractics.Model
             Apartment = apartment;
         }
 
+        /// <summary>
+        /// Конструктор по умолчанию.
+        /// </summary>
         public Address() { }
+
+        /// <summary>
+        /// Возвращает значение адреса в одну строку.
+        /// </summary>
+        /// <returns>Аддресс строчного типа.</returns>
+        public override string ToString()
+        {
+            return $"{Country}, г.{City}, ул.{Street}, дом.{Building}, кв.{Apartment}.";
+        }
     }
 }
