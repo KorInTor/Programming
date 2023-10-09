@@ -17,10 +17,18 @@ namespace ObjectOrientedPractics
         public MainForm()
         {
             InitializeComponent();
-            for (int i = 0; i < 10; i++)
+            Random _random = new Random();
+            for (int i = 0; i < _random.Next(10, 20); i++)
             {
                 _store.Items.Add(ItemFactory.CreateRandomItem());
                 _store.Customers.Add(CustomerFactory.CreateRandomCustomer());
+            }
+            foreach (Customer customer in _store.Customers)
+            {
+                for (int i = 0; i <= _random.Next(1, 10); i++)
+                {
+                    customer.Orders.Add(OrderFactory.CreateRandomOrder(customer, _store.Items, _random.Next(1, 10)));
+                }
             }
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;

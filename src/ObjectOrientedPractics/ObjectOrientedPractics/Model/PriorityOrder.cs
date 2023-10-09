@@ -63,5 +63,11 @@ namespace ObjectOrientedPractics.Model
             DesiredDeliveryDate = desiredDeliveryDate;
             DesiredDeliveryTime = desiredDeliveryTime;
         }
+
+        /// <summary>
+        /// Конструктор по умолчанию.
+        /// </summary>
+        public PriorityOrder()
+        { }
     }
 }

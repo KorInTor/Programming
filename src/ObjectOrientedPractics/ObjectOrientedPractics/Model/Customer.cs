@@ -110,6 +110,11 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Возвращает и задёт приоритетность покупателя. Новые заказы приоритетного покупателя должны быть: <see cref="PriorityOrder"/>.
+        /// </summary>
+        public bool IsPriority { get; set; }
+
+        /// <summary>
         /// Создает новый экземпляр класса <see cref="Customer"/>
         /// </summary>
         /// <param name="fullname">Полное имя покупателя. Должен быть не более 200 символов.</param>
@@ -121,6 +126,7 @@ namespace ObjectOrientedPractics.Model
             _id = IdGenerator.GetNextId();
             Cart = new Cart();
             Orders = new List<Order>();
+            IsPriority = false;
         }
 
         /// <summary>

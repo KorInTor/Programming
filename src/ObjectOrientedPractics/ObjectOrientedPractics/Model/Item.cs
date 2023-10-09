@@ -77,7 +77,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задаёт цену товара. Должен быть в пределах от 0 до 100000 символов.
+        /// Возвращает и задаёт цену товара. Должен быть в пределах от 0 до 100000.
         /// </summary>
         public double Cost
         {
@@ -87,7 +87,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertValueInRange(value, 0, 10000, "Cost");
+                ValueValidator.AssertValueInRange(value, 0, 100000, "Cost");
                 _cost = value;
             }
         }

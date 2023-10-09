@@ -31,6 +31,7 @@
             Model.Address address1 = new Model.Address();
             CustmerTableLayoutPanel = new TableLayoutPanel();
             CustomersInfoPanel = new Panel();
+            PriorityCheckBox = new CheckBox();
             AddressControl = new Controls.AddressControl();
             IdTextBox = new TextBox();
             FullnameTextBox = new TextBox();
@@ -68,6 +69,7 @@
             // CustomersInfoPanel
             // 
             CustomersInfoPanel.BackColor = SystemColors.Window;
+            CustomersInfoPanel.Controls.Add(PriorityCheckBox);
             CustomersInfoPanel.Controls.Add(AddressControl);
             CustomersInfoPanel.Controls.Add(IdTextBox);
             CustomersInfoPanel.Controls.Add(FullnameTextBox);
@@ -81,6 +83,18 @@
             CustomersInfoPanel.Size = new Size(478, 376);
             CustomersInfoPanel.TabIndex = 0;
             // 
+            // PriorityCheckBox
+            // 
+            PriorityCheckBox.AutoSize = true;
+            PriorityCheckBox.Location = new Point(76, 102);
+            PriorityCheckBox.Name = "PriorityCheckBox";
+            PriorityCheckBox.Padding = new Padding(3);
+            PriorityCheckBox.Size = new Size(81, 25);
+            PriorityCheckBox.TabIndex = 12;
+            PriorityCheckBox.Text = "Is Priority";
+            PriorityCheckBox.UseVisualStyleBackColor = true;
+            PriorityCheckBox.CheckedChanged += PriorityCheckBox_CheckedChanged;
+            // 
             // AddressControl
             // 
             address1.Apartment = "";
@@ -90,7 +104,7 @@
             address1.Index = 111111;
             address1.Street = "";
             AddressControl.Address = address1;
-            AddressControl.Location = new Point(0, 111);
+            AddressControl.Location = new Point(0, 133);
             AddressControl.Name = "AddressControl";
             AddressControl.Size = new Size(474, 150);
             AddressControl.TabIndex = 11;
@@ -263,5 +277,6 @@
         private TextBox IdTextBox;
         private TextBox FullnameTextBox;
         private Controls.AddressControl AddressControl;
+        private CheckBox PriorityCheckBox;
     }
 }

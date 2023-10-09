@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Service
     public class AddressFactory
     {
         private static Random _random = new Random();
-        private static string[] _countries = { "Россия", "Украина", "Беларусь" };
+        private static string[] _countries = { "Россия", "Казахстан", "Беларусь" };
         private static string[] _cities =
         {
             "Москва",
