@@ -62,9 +62,9 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
-        /// Обновление информации в TextBox'ax взятая из <see cref="_selectedCustomer"/>.
+        /// Обновление информации в UI взятая из <see cref="_selectedCustomer"/>.
         /// </summary>
-        private void UpdateTextBoxesInfo()
+        private void UpdateUIInfo()
         {
             if (CustomersListBox.SelectedIndex == -1)
             {
@@ -75,6 +75,14 @@ namespace ObjectOrientedPractics.View.Tabs
             AddressControl.Address = _selectedCustomer.Address;
             FullnameTextBox.Text = _selectedCustomer.Fullname;
             IdTextBox.Text = _selectedCustomer.Id.ToString();
+            if (_selectedCustomer.IsPriority)
+            {
+                PriorityCheckBox.Checked = true;
+            }
+            else
+            {
+                PriorityCheckBox.Checked = false;
+            }
         }
 
         /// <summary>
@@ -110,7 +118,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateTextBoxesInfo();
+            UpdateUIInfo();
         }
 
         private void FullnameTextBox_TextChanged(object sender, EventArgs e)
@@ -130,6 +138,18 @@ namespace ObjectOrientedPractics.View.Tabs
                 FullnameTextBox.BackColor = Color.LightPink;
             }
             SortCustomersList();
+        }
+
+        private void PriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (PriorityCheckBox.Checked)
+            {
+                _selectedCustomer.IsPriority = true;
+            }
+            else
+            {
+                _selectedCustomer.IsPriority = false;
+            }
         }
     }
 }

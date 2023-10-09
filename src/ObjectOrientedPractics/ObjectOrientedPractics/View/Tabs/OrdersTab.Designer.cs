@@ -34,6 +34,10 @@ namespace ObjectOrientedPractics.View.Tabs
             Address address1 = new Address();
             OrdersTableLayoutPanel = new TableLayoutPanel();
             OrderInfoPanel = new Panel();
+            PriorityPanel = new Panel();
+            DesiredTimeComboBox = new ComboBox();
+            DesiredTimeLabel = new Label();
+            PriorityOptionsLabel = new Label();
             FinalAmountLabel = new Label();
             AmountLabel = new Label();
             OrderItemsListBox = new ListBox();
@@ -57,6 +61,7 @@ namespace ObjectOrientedPractics.View.Tabs
             OrdersLabel = new Label();
             OrdersTableLayoutPanel.SuspendLayout();
             OrderInfoPanel.SuspendLayout();
+            PriorityPanel.SuspendLayout();
             ItemsControlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).BeginInit();
             SuspendLayout();
@@ -74,12 +79,13 @@ namespace ObjectOrientedPractics.View.Tabs
             OrdersTableLayoutPanel.Name = "OrdersTableLayoutPanel";
             OrdersTableLayoutPanel.RowCount = 1;
             OrdersTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            OrdersTableLayoutPanel.Size = new Size(1110, 612);
+            OrdersTableLayoutPanel.Size = new Size(1109, 612);
             OrdersTableLayoutPanel.TabIndex = 1;
             // 
             // OrderInfoPanel
             // 
             OrderInfoPanel.BackColor = SystemColors.Window;
+            OrderInfoPanel.Controls.Add(PriorityPanel);
             OrderInfoPanel.Controls.Add(FinalAmountLabel);
             OrderInfoPanel.Controls.Add(AmountLabel);
             OrderInfoPanel.Controls.Add(OrderItemsListBox);
@@ -96,15 +102,62 @@ namespace ObjectOrientedPractics.View.Tabs
             OrderInfoPanel.Location = new Point(502, 3);
             OrderInfoPanel.Name = "OrderInfoPanel";
             OrderInfoPanel.Padding = new Padding(3);
-            OrderInfoPanel.Size = new Size(605, 606);
+            OrderInfoPanel.Size = new Size(604, 606);
             OrderInfoPanel.TabIndex = 0;
+            // 
+            // PriorityPanel
+            // 
+            PriorityPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            PriorityPanel.Controls.Add(DesiredTimeComboBox);
+            PriorityPanel.Controls.Add(DesiredTimeLabel);
+            PriorityPanel.Controls.Add(PriorityOptionsLabel);
+            PriorityPanel.Location = new Point(387, 6);
+            PriorityPanel.Name = "PriorityPanel";
+            PriorityPanel.Size = new Size(210, 100);
+            PriorityPanel.TabIndex = 22;
+            PriorityPanel.Visible = false;
+            // 
+            // DesiredTimeComboBox
+            // 
+            DesiredTimeComboBox.AutoCompleteCustomSource.AddRange(new string[] { "9:00 – 11:00", "11:00 – 13:00", "13:00 – 15:00", "15:00 – 17:00", "17:00 – 19:00", "19:00 – 21:00" });
+            DesiredTimeComboBox.FormattingEnabled = true;
+            DesiredTimeComboBox.Items.AddRange(new object[] { "9:00 – 11:00", "11:00 – 13:00", "13:00 – 15:00", "15:00 – 17:00", "17:00 – 19:00", "19:00 – 21:00" });
+            DesiredTimeComboBox.Location = new Point(97, 40);
+            DesiredTimeComboBox.Name = "DesiredTimeComboBox";
+            DesiredTimeComboBox.Size = new Size(110, 23);
+            DesiredTimeComboBox.TabIndex = 30;
+            DesiredTimeComboBox.SelectedIndexChanged += DesiredTimeComboBox_SelectedIndexChanged;
+            // 
+            // DesiredTimeLabel
+            // 
+            DesiredTimeLabel.AutoSize = true;
+            DesiredTimeLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            DesiredTimeLabel.Location = new Point(0, 40);
+            DesiredTimeLabel.Margin = new Padding(3);
+            DesiredTimeLabel.Name = "DesiredTimeLabel";
+            DesiredTimeLabel.Padding = new Padding(3);
+            DesiredTimeLabel.Size = new Size(91, 21);
+            DesiredTimeLabel.TabIndex = 29;
+            DesiredTimeLabel.Text = "Delivery Time: ";
+            // 
+            // PriorityOptionsLabel
+            // 
+            PriorityOptionsLabel.AutoSize = true;
+            PriorityOptionsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            PriorityOptionsLabel.Location = new Point(0, 3);
+            PriorityOptionsLabel.Margin = new Padding(3);
+            PriorityOptionsLabel.Name = "PriorityOptionsLabel";
+            PriorityOptionsLabel.Padding = new Padding(3);
+            PriorityOptionsLabel.Size = new Size(100, 21);
+            PriorityOptionsLabel.TabIndex = 28;
+            PriorityOptionsLabel.Text = "Priority Options";
             // 
             // FinalAmountLabel
             // 
             FinalAmountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             FinalAmountLabel.AutoSize = true;
             FinalAmountLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            FinalAmountLabel.Location = new Point(511, 578);
+            FinalAmountLabel.Location = new Point(510, 578);
             FinalAmountLabel.Name = "FinalAmountLabel";
             FinalAmountLabel.Size = new Size(88, 25);
             FinalAmountLabel.TabIndex = 21;
@@ -115,7 +168,7 @@ namespace ObjectOrientedPractics.View.Tabs
             AmountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             AmountLabel.AutoSize = true;
             AmountLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AmountLabel.Location = new Point(538, 554);
+            AmountLabel.Location = new Point(537, 554);
             AmountLabel.Margin = new Padding(3);
             AmountLabel.Name = "AmountLabel";
             AmountLabel.Padding = new Padding(3);
@@ -131,7 +184,7 @@ namespace ObjectOrientedPractics.View.Tabs
             OrderItemsListBox.ItemHeight = 15;
             OrderItemsListBox.Location = new Point(6, 322);
             OrderItemsListBox.Name = "OrderItemsListBox";
-            OrderItemsListBox.Size = new Size(593, 226);
+            OrderItemsListBox.Size = new Size(592, 226);
             OrderItemsListBox.TabIndex = 15;
             // 
             // AddressControl
@@ -161,7 +214,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             StatusLabel.AutoSize = true;
             StatusLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            StatusLabel.Location = new Point(3, 101);
+            StatusLabel.Location = new Point(3, 104);
             StatusLabel.Margin = new Padding(3);
             StatusLabel.Name = "StatusLabel";
             StatusLabel.Padding = new Padding(3);
@@ -201,7 +254,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             CreatedLabel.AutoSize = true;
             CreatedLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            CreatedLabel.Location = new Point(3, 70);
+            CreatedLabel.Location = new Point(3, 73);
             CreatedLabel.Margin = new Padding(3);
             CreatedLabel.Name = "CreatedLabel";
             CreatedLabel.Padding = new Padding(3);
@@ -223,8 +276,8 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // SelectedOrderLabel
             // 
+            SelectedOrderLabel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             SelectedOrderLabel.AutoSize = true;
-            SelectedOrderLabel.Dock = DockStyle.Top;
             SelectedOrderLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             SelectedOrderLabel.Location = new Point(3, 3);
             SelectedOrderLabel.Margin = new Padding(3);
@@ -328,10 +381,12 @@ namespace ObjectOrientedPractics.View.Tabs
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(OrdersTableLayoutPanel);
             Name = "OrdersTab";
-            Size = new Size(1110, 612);
+            Size = new Size(1109, 612);
             OrdersTableLayoutPanel.ResumeLayout(false);
             OrderInfoPanel.ResumeLayout(false);
             OrderInfoPanel.PerformLayout();
+            PriorityPanel.ResumeLayout(false);
+            PriorityPanel.PerformLayout();
             ItemsControlPanel.ResumeLayout(false);
             ItemsControlPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).EndInit();
@@ -364,5 +419,9 @@ namespace ObjectOrientedPractics.View.Tabs
         private DataGridViewTextBoxColumn Fullname;
         private DataGridViewTextBoxColumn DeliveryAddress;
         private DataGridViewTextBoxColumn Amount;
+        private Panel PriorityPanel;
+        private ComboBox DesiredTimeComboBox;
+        private Label DesiredTimeLabel;
+        private Label PriorityOptionsLabel;
     }
 }

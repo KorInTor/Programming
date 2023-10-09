@@ -129,7 +129,7 @@
             // 
             // OrdersTab
             // 
-            OrdersTab.Customers = new List<Model.Customer>();
+            OrdersTab.Customers = null;
             OrdersTab.Dock = DockStyle.Fill;
             OrdersTab.Location = new Point(3, 3);
             OrdersTab.Name = "OrdersTab";

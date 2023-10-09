@@ -30,6 +30,9 @@
         {
             Model.Address address1 = new Model.Address();
             OrderInfoPanel = new Panel();
+            AddItemButton = new Button();
+            RemoveItemButton = new Button();
+            ClearOrderButton = new Button();
             DesiredTimeComboBox = new ComboBox();
             DesiredTimeLabel = new Label();
             PriorityOptionsLabel = new Label();
@@ -47,9 +50,6 @@
             CreatedLabel = new Label();
             IdLabel = new Label();
             SelectedOrderLabel = new Label();
-            AddItemButton = new Button();
-            RemoveItemButton = new Button();
-            ClearOrderButton = new Button();
             OrderInfoPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,11 +83,51 @@
             OrderInfoPanel.Size = new Size(746, 608);
             OrderInfoPanel.TabIndex = 1;
             // 
+            // AddItemButton
+            // 
+            AddItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            AddItemButton.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            AddItemButton.Location = new Point(7, 556);
+            AddItemButton.Name = "AddItemButton";
+            AddItemButton.Padding = new Padding(3);
+            AddItemButton.Size = new Size(101, 40);
+            AddItemButton.TabIndex = 30;
+            AddItemButton.Text = "Add Item";
+            AddItemButton.UseVisualStyleBackColor = true;
+            AddItemButton.Click += AddItemButton_Click;
+            // 
+            // RemoveItemButton
+            // 
+            RemoveItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            RemoveItemButton.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            RemoveItemButton.Location = new Point(114, 556);
+            RemoveItemButton.Name = "RemoveItemButton";
+            RemoveItemButton.Padding = new Padding(3);
+            RemoveItemButton.Size = new Size(101, 40);
+            RemoveItemButton.TabIndex = 29;
+            RemoveItemButton.Text = "Remove Item";
+            RemoveItemButton.UseVisualStyleBackColor = true;
+            RemoveItemButton.Click += RemoveItemButton_Click;
+            // 
+            // ClearOrderButton
+            // 
+            ClearOrderButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ClearOrderButton.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            ClearOrderButton.Location = new Point(637, 556);
+            ClearOrderButton.Name = "ClearOrderButton";
+            ClearOrderButton.Padding = new Padding(3);
+            ClearOrderButton.Size = new Size(101, 40);
+            ClearOrderButton.TabIndex = 28;
+            ClearOrderButton.Text = "Clear Order";
+            ClearOrderButton.UseVisualStyleBackColor = true;
+            ClearOrderButton.Click += ClearOrderButton_Click;
+            // 
             // DesiredTimeComboBox
             // 
+            DesiredTimeComboBox.AutoCompleteCustomSource.AddRange(new string[] { "9:00 – 11:00", "11:00 – 13:00", "13:00 – 15:00", "15:00 – 17:00", "17:00 – 19:00", "19:00 – 21:00" });
             DesiredTimeComboBox.FormattingEnabled = true;
             DesiredTimeComboBox.Items.AddRange(new object[] { "9:00 – 11:00", "11:00 – 13:00", "13:00 – 15:00", "15:00 – 17:00", "17:00 – 19:00", "19:00 – 21:00" });
-            DesiredTimeComboBox.Location = new Point(379, 37);
+            DesiredTimeComboBox.Location = new Point(386, 40);
             DesiredTimeComboBox.Name = "DesiredTimeComboBox";
             DesiredTimeComboBox.Size = new Size(191, 23);
             DesiredTimeComboBox.TabIndex = 27;
@@ -108,7 +148,7 @@
             // 
             PriorityOptionsLabel.AutoSize = true;
             PriorityOptionsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            PriorityOptionsLabel.Location = new Point(300, 6);
+            PriorityOptionsLabel.Location = new Point(289, 3);
             PriorityOptionsLabel.Margin = new Padding(3);
             PriorityOptionsLabel.Name = "PriorityOptionsLabel";
             PriorityOptionsLabel.Padding = new Padding(3);
@@ -150,6 +190,7 @@
             OrderItemsListBox.Name = "OrderItemsListBox";
             OrderItemsListBox.Size = new Size(732, 170);
             OrderItemsListBox.TabIndex = 22;
+            OrderItemsListBox.SelectedIndexChanged += OrderItemsListBox_SelectedIndexChanged;
             // 
             // FinalAmountLabel
             // 
@@ -274,42 +315,6 @@
             SelectedOrderLabel.TabIndex = 3;
             SelectedOrderLabel.Text = "Selected Order";
             // 
-            // AddItemButton
-            // 
-            AddItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            AddItemButton.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            AddItemButton.Location = new Point(7, 556);
-            AddItemButton.Name = "AddItemButton";
-            AddItemButton.Padding = new Padding(3);
-            AddItemButton.Size = new Size(101, 40);
-            AddItemButton.TabIndex = 30;
-            AddItemButton.Text = "Add Item";
-            AddItemButton.UseVisualStyleBackColor = true;
-            // 
-            // RemoveItemButton
-            // 
-            RemoveItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            RemoveItemButton.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            RemoveItemButton.Location = new Point(114, 556);
-            RemoveItemButton.Name = "RemoveItemButton";
-            RemoveItemButton.Padding = new Padding(3);
-            RemoveItemButton.Size = new Size(101, 40);
-            RemoveItemButton.TabIndex = 29;
-            RemoveItemButton.Text = "Remove Item";
-            RemoveItemButton.UseVisualStyleBackColor = true;
-            // 
-            // ClearOrderButton
-            // 
-            ClearOrderButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ClearOrderButton.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            ClearOrderButton.Location = new Point(637, 556);
-            ClearOrderButton.Name = "ClearOrderButton";
-            ClearOrderButton.Padding = new Padding(3);
-            ClearOrderButton.Size = new Size(101, 40);
-            ClearOrderButton.TabIndex = 28;
-            ClearOrderButton.Text = "Clear Order";
-            ClearOrderButton.UseVisualStyleBackColor = true;
-            // 
             // PriorityOrdersTab
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -336,14 +341,14 @@
         private Label CreatedLabel;
         private Label IdLabel;
         private Label SelectedOrderLabel;
-        private Label PriorityOptionsLabel;
         private Label label1;
         private Label label2;
         private ListBox OrderItemsListBox;
-        private ComboBox DesiredTimeComboBox;
-        private Label DesiredTimeLabel;
         private Button AddItemButton;
         private Button RemoveItemButton;
         private Button ClearOrderButton;
+        private ComboBox DesiredTimeComboBox;
+        private Label DesiredTimeLabel;
+        private Label PriorityOptionsLabel;
     }
 }

@@ -76,6 +76,17 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTextBox.Text = _currentOrder.Id.ToString();
             CreationDateTextBox.Text = _currentOrder.Date.ToString();
             StatusComboBox.SelectedItem = _currentOrder.Status;
+            FinalAmountLabel.Text = _currentOrder.Amount.ToString();
+
+            if (_currentOrder is PriorityOrder priority)
+            {
+                PriorityPanel.Visible = true;
+                DesiredTimeComboBox.Text = priority.DesiredDeliveryTime;
+            }
+            else
+            {
+                PriorityPanel.Visible = false;
+            }
         }
 
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,6 +97,14 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             _currentOrder.Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), StatusComboBox.SelectedItem.ToString());
             OrdersDataGridView.CurrentRow.Cells["OrderStatus"].Value = StatusComboBox.SelectedItem.ToString();
+        }
+
+        private void DesiredTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_currentOrder is PriorityOrder priority)
+            {
+                priority.DesiredDeliveryTime = DesiredTimeComboBox.SelectedItem.ToString();
+            }
         }
     }
 }
