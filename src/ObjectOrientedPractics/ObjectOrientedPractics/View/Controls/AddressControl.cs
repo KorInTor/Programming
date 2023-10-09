@@ -25,7 +25,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
         }
 
         /// <summary>
-        /// Возвращает и задаёт значения адреса в <see cref="AddressControl "/>.
+        /// Возвращает и задаёт значения адреса в <see cref="AddressControl"/>.
         /// </summary>
         public Address Address
         {

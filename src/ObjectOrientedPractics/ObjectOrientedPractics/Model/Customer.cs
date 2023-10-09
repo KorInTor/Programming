@@ -28,6 +28,46 @@ namespace ObjectOrientedPractics.Model
         private Address _address;
 
         /// <summary>
+        /// Корзина покупателя.
+        /// </summary>
+        private Cart _cart;
+
+        /// <summary>
+        /// Список заказов.
+        /// </summary>
+        private List<Order> _orders;
+
+        /// <summary>
+        /// Возвращает и задаёт список заказов покупателя.
+        /// </summary>
+        public List<Order> Orders
+        { 
+            get 
+            { 
+                return _orders; 
+            } 
+            set 
+            { 
+                _orders = value; 
+            } 
+        }
+
+        /// <summary>
+        /// Возвращает и задаёт корзину покупателя.
+        /// </summary>
+        public Cart Cart
+        {
+            get 
+            { 
+                return _cart; 
+            }
+            set 
+            { 
+                _cart = value; 
+            }
+        }
+
+        /// <summary>
         /// Возвращает уникальный идентификатор покупателя.
         /// </summary>
         public int Id 
@@ -79,7 +119,13 @@ namespace ObjectOrientedPractics.Model
             Fullname = fullname;
             Address = address;
             _id = IdGenerator.GetNextId();
+            Cart = new Cart();
+            Orders = new List<Order>();
         }
 
+        /// <summary>
+        /// Конструктор по умолчанию.
+        /// </summary>
+        public Customer() { }
     }
 }

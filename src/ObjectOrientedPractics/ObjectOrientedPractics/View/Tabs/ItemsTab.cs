@@ -13,6 +13,7 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        
         List<Item> _items = new();
 
         private Item _selectedItem = null;
