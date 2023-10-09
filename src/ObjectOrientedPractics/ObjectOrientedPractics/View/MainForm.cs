@@ -1,4 +1,5 @@
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Service;
 using ObjectOrientedPractics.View.Tabs;
 
 namespace ObjectOrientedPractics
@@ -16,6 +17,11 @@ namespace ObjectOrientedPractics
         public MainForm()
         {
             InitializeComponent();
+            for (int i = 0; i < 10; i++)
+            {
+                _store.Items.Add(ItemFactory.CreateRandomItem());
+                _store.Customers.Add(CustomerFactory.CreateRandomCustomer());
+            }
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;
             CartsTab.Customers = _store.Customers;
