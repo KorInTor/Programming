@@ -10,6 +10,7 @@ namespace ObjectOrientedPractics.Service
     public class ItemFactory
     {
         private static Random _random = new Random();
+
         private static string[] _names =
         {
             "Тормозные колодки",
@@ -53,18 +54,33 @@ namespace ObjectOrientedPractics.Service
             "Датчик положения коленвала",
             "Датчик положения распредвала",
         };
-        private static string[] _infos =
+
+        private static string[] _topics =
         {
-            "Высококачественный товар, изготовленный с использованием передовых технологий",
-            "Продукт премиум-класса, созданный с использованием инновационных материалов",
-            "Этот товар произведен в стране, известной своим качеством и надежностью",
-            "Конструкция этого товара продумана до мелочей для вашего удобства",
-            "Изделие отличается превосходным качеством деталей и долговечностью",
-            "Товар прошел строгий контроль качества и соответствует всем стандартам",
-            "Этот продукт сочетает в себе стиль, функциональность и непревзойденное качество",
-            "Изготовлено с использованием экологически чистых материалов и технологий",
-            "Продукт предлагает превосходное соотношение цены и качества",
-            "Этот товар обеспечит вам комфорт и удовлетворение от использования на долгие годы"
+            "Производитель: {0}",
+            "Срок службы: {0} лет",
+            "Совместимость: {0}",
+            "Материал: {0}",
+            "Вес: {0} г",
+            "Размеры: {0}",
+            "Цвет: {0}",
+            "Тип установки: {0}",
+            "Уровень шума: {0} дБ",
+            "Энергоэффективность: класс {0}"
+        };
+
+        private static string[][] _values =
+        {
+            new string[] {"Bosch", "Denso", "NGK", "ACDelco", "Motorcraft"},
+            new string[] {"1", "2", "3", "4", "5"},
+            new string[] {"Toyota Corolla", "Honda Civic", "Ford Focus"},
+            new string[] {"Алюминий", "Сталь", "Пластик"},
+            new string[] {"100", "200", "300", "400", "500"},
+            new string[] {"10x20x30", "40x50x60", "70x80x90"},
+            new string[] {"Красный", "Синий", "Зеленый"},
+            new string[] {"Ручная", "Автоматическая"},
+            new string[] {"10", "20", "30", "40"},
+            new string[] {"A", "B", "C"}
         };
 
         private static Category[] _categories = (Category[])Enum.GetValues(typeof(Category));
@@ -72,11 +88,27 @@ namespace ObjectOrientedPractics.Service
         public static Item CreateRandomItem()
         {
             string name = ($"{_names[_random.Next(_names.Length)]}, Модель#{_random.Next(1,100)}");
-            string info = _infos[_random.Next(_infos.Length)];
             double cost = Math.Round(_random.NextDouble() * 10000, 2);
             Category category = _categories[_random.Next(_categories.Length)];
 
-            return new Item(name, info, cost, category);
+            return new Item(name, CreateItemDesc(), cost, category);
+        }
+
+
+        private static string CreateItemDesc()
+        {
+            int topicCount = _random.Next(1, _topics.Length + 1);
+            List<string> selectedTopics = new List<string>();
+            for (int i = 0; i < topicCount; i++)
+            {
+                int topicIndex = _random.Next(_topics.Length);
+                string topic = _topics[topicIndex];
+                string value = _values[topicIndex][_random.Next(_values[topicIndex].Length)];
+
+                selectedTopics.Add(string.Format(topic, value));
+            }
+            string desc = string.Join("; ", selectedTopics);
+            return desc;
         }
     }
 

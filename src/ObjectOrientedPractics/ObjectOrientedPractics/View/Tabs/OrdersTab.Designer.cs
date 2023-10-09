@@ -32,7 +32,15 @@ namespace ObjectOrientedPractics.View.Tabs
         private void InitializeComponent()
         {
             Address address1 = new Address();
-            OrdersTableLayoutPanel = new TableLayoutPanel();
+            ItemsControlPanel = new Panel();
+            OrdersDataGridView = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Created = new DataGridViewTextBoxColumn();
+            OrderStatus = new DataGridViewTextBoxColumn();
+            Fullname = new DataGridViewTextBoxColumn();
+            DeliveryAddress = new DataGridViewTextBoxColumn();
+            Amount = new DataGridViewTextBoxColumn();
+            OrdersLabel = new Label();
             OrderInfoPanel = new Panel();
             PriorityPanel = new Panel();
             DesiredTimeComboBox = new ComboBox();
@@ -50,37 +58,102 @@ namespace ObjectOrientedPractics.View.Tabs
             CreatedLabel = new Label();
             IdLabel = new Label();
             SelectedOrderLabel = new Label();
-            ItemsControlPanel = new Panel();
-            OrdersDataGridView = new DataGridView();
-            Id = new DataGridViewTextBoxColumn();
-            Created = new DataGridViewTextBoxColumn();
-            OrderStatus = new DataGridViewTextBoxColumn();
-            Fullname = new DataGridViewTextBoxColumn();
-            DeliveryAddress = new DataGridViewTextBoxColumn();
-            Amount = new DataGridViewTextBoxColumn();
-            OrdersLabel = new Label();
-            OrdersTableLayoutPanel.SuspendLayout();
-            OrderInfoPanel.SuspendLayout();
-            PriorityPanel.SuspendLayout();
+            OrdersTableLayoutPanel = new TableLayoutPanel();
             ItemsControlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).BeginInit();
+            OrderInfoPanel.SuspendLayout();
+            PriorityPanel.SuspendLayout();
+            OrdersTableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // OrdersTableLayoutPanel
+            // ItemsControlPanel
             // 
-            OrdersTableLayoutPanel.ColumnCount = 2;
-            OrdersTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
-            OrdersTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55F));
-            OrdersTableLayoutPanel.Controls.Add(OrderInfoPanel, 1, 0);
-            OrdersTableLayoutPanel.Controls.Add(ItemsControlPanel, 0, 0);
-            OrdersTableLayoutPanel.Dock = DockStyle.Fill;
-            OrdersTableLayoutPanel.Location = new Point(0, 0);
-            OrdersTableLayoutPanel.MinimumSize = new Size(500, 0);
-            OrdersTableLayoutPanel.Name = "OrdersTableLayoutPanel";
-            OrdersTableLayoutPanel.RowCount = 1;
-            OrdersTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            OrdersTableLayoutPanel.Size = new Size(1109, 612);
-            OrdersTableLayoutPanel.TabIndex = 1;
+            ItemsControlPanel.Controls.Add(OrdersDataGridView);
+            ItemsControlPanel.Controls.Add(OrdersLabel);
+            ItemsControlPanel.Dock = DockStyle.Fill;
+            ItemsControlPanel.Location = new Point(5, 3);
+            ItemsControlPanel.Margin = new Padding(5, 3, 3, 3);
+            ItemsControlPanel.MinimumSize = new Size(100, 0);
+            ItemsControlPanel.Name = "ItemsControlPanel";
+            ItemsControlPanel.Padding = new Padding(3);
+            ItemsControlPanel.Size = new Size(604, 606);
+            ItemsControlPanel.TabIndex = 1;
+            // 
+            // OrdersDataGridView
+            // 
+            OrdersDataGridView.AllowUserToAddRows = false;
+            OrdersDataGridView.AllowUserToDeleteRows = false;
+            OrdersDataGridView.AllowUserToResizeRows = false;
+            OrdersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { Id, Created, OrderStatus, Fullname, DeliveryAddress, Amount });
+            OrdersDataGridView.Dock = DockStyle.Fill;
+            OrdersDataGridView.Location = new Point(3, 24);
+            OrdersDataGridView.MultiSelect = false;
+            OrdersDataGridView.Name = "OrdersDataGridView";
+            OrdersDataGridView.ReadOnly = true;
+            OrdersDataGridView.RowHeadersVisible = false;
+            OrdersDataGridView.RowTemplate.Height = 25;
+            OrdersDataGridView.Size = new Size(598, 579);
+            OrdersDataGridView.TabIndex = 3;
+            OrdersDataGridView.SelectionChanged += OrdersDataGridView_SelectionChanged;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Id.Width = 50;
+            // 
+            // Created
+            // 
+            Created.HeaderText = "Created";
+            Created.Name = "Created";
+            Created.ReadOnly = true;
+            Created.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // OrderStatus
+            // 
+            OrderStatus.HeaderText = "Order Status";
+            OrderStatus.Name = "OrderStatus";
+            OrderStatus.ReadOnly = true;
+            OrderStatus.Resizable = DataGridViewTriState.True;
+            OrderStatus.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Fullname
+            // 
+            Fullname.HeaderText = "Customer Fullname";
+            Fullname.Name = "Fullname";
+            Fullname.ReadOnly = true;
+            Fullname.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Fullname.Width = 200;
+            // 
+            // DeliveryAddress
+            // 
+            DeliveryAddress.HeaderText = "Delivery Address";
+            DeliveryAddress.Name = "DeliveryAddress";
+            DeliveryAddress.ReadOnly = true;
+            DeliveryAddress.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Amount
+            // 
+            Amount.HeaderText = "Amount";
+            Amount.Name = "Amount";
+            Amount.ReadOnly = true;
+            Amount.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // OrdersLabel
+            // 
+            OrdersLabel.AutoSize = true;
+            OrdersLabel.Dock = DockStyle.Top;
+            OrdersLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            OrdersLabel.Location = new Point(3, 3);
+            OrdersLabel.Margin = new Padding(3);
+            OrdersLabel.Name = "OrdersLabel";
+            OrdersLabel.Padding = new Padding(3);
+            OrdersLabel.Size = new Size(45, 21);
+            OrdersLabel.TabIndex = 2;
+            OrdersLabel.Text = "Items";
             // 
             // OrderInfoPanel
             // 
@@ -99,10 +172,10 @@ namespace ObjectOrientedPractics.View.Tabs
             OrderInfoPanel.Controls.Add(IdLabel);
             OrderInfoPanel.Controls.Add(SelectedOrderLabel);
             OrderInfoPanel.Dock = DockStyle.Fill;
-            OrderInfoPanel.Location = new Point(502, 3);
+            OrderInfoPanel.Location = new Point(615, 3);
             OrderInfoPanel.Name = "OrderInfoPanel";
             OrderInfoPanel.Padding = new Padding(3);
-            OrderInfoPanel.Size = new Size(604, 606);
+            OrderInfoPanel.Size = new Size(491, 606);
             OrderInfoPanel.TabIndex = 0;
             // 
             // PriorityPanel
@@ -111,7 +184,7 @@ namespace ObjectOrientedPractics.View.Tabs
             PriorityPanel.Controls.Add(DesiredTimeComboBox);
             PriorityPanel.Controls.Add(DesiredTimeLabel);
             PriorityPanel.Controls.Add(PriorityOptionsLabel);
-            PriorityPanel.Location = new Point(387, 6);
+            PriorityPanel.Location = new Point(274, 6);
             PriorityPanel.Name = "PriorityPanel";
             PriorityPanel.Size = new Size(210, 100);
             PriorityPanel.TabIndex = 22;
@@ -157,7 +230,7 @@ namespace ObjectOrientedPractics.View.Tabs
             FinalAmountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             FinalAmountLabel.AutoSize = true;
             FinalAmountLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            FinalAmountLabel.Location = new Point(510, 578);
+            FinalAmountLabel.Location = new Point(397, 578);
             FinalAmountLabel.Name = "FinalAmountLabel";
             FinalAmountLabel.Size = new Size(88, 25);
             FinalAmountLabel.TabIndex = 21;
@@ -168,7 +241,7 @@ namespace ObjectOrientedPractics.View.Tabs
             AmountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             AmountLabel.AutoSize = true;
             AmountLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AmountLabel.Location = new Point(537, 554);
+            AmountLabel.Location = new Point(424, 554);
             AmountLabel.Margin = new Padding(3);
             AmountLabel.Name = "AmountLabel";
             AmountLabel.Padding = new Padding(3);
@@ -184,7 +257,7 @@ namespace ObjectOrientedPractics.View.Tabs
             OrderItemsListBox.ItemHeight = 15;
             OrderItemsListBox.Location = new Point(6, 322);
             OrderItemsListBox.Name = "OrderItemsListBox";
-            OrderItemsListBox.Size = new Size(592, 226);
+            OrderItemsListBox.Size = new Size(479, 226);
             OrderItemsListBox.TabIndex = 15;
             // 
             // AddressControl
@@ -287,93 +360,21 @@ namespace ObjectOrientedPractics.View.Tabs
             SelectedOrderLabel.TabIndex = 3;
             SelectedOrderLabel.Text = "Selected Order";
             // 
-            // ItemsControlPanel
+            // OrdersTableLayoutPanel
             // 
-            ItemsControlPanel.Controls.Add(OrdersDataGridView);
-            ItemsControlPanel.Controls.Add(OrdersLabel);
-            ItemsControlPanel.Dock = DockStyle.Fill;
-            ItemsControlPanel.Location = new Point(5, 3);
-            ItemsControlPanel.Margin = new Padding(5, 3, 3, 3);
-            ItemsControlPanel.MinimumSize = new Size(100, 0);
-            ItemsControlPanel.Name = "ItemsControlPanel";
-            ItemsControlPanel.Padding = new Padding(3);
-            ItemsControlPanel.Size = new Size(491, 606);
-            ItemsControlPanel.TabIndex = 1;
-            // 
-            // OrdersDataGridView
-            // 
-            OrdersDataGridView.AllowUserToAddRows = false;
-            OrdersDataGridView.AllowUserToDeleteRows = false;
-            OrdersDataGridView.AllowUserToResizeRows = false;
-            OrdersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { Id, Created, OrderStatus, Fullname, DeliveryAddress, Amount });
-            OrdersDataGridView.Dock = DockStyle.Fill;
-            OrdersDataGridView.Location = new Point(3, 24);
-            OrdersDataGridView.MultiSelect = false;
-            OrdersDataGridView.Name = "OrdersDataGridView";
-            OrdersDataGridView.ReadOnly = true;
-            OrdersDataGridView.RowHeadersVisible = false;
-            OrdersDataGridView.RowTemplate.Height = 25;
-            OrdersDataGridView.Size = new Size(485, 579);
-            OrdersDataGridView.TabIndex = 3;
-            OrdersDataGridView.SelectionChanged += OrdersDataGridView_SelectionChanged;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "Id";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            Id.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Created
-            // 
-            Created.HeaderText = "Created";
-            Created.Name = "Created";
-            Created.ReadOnly = true;
-            Created.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // OrderStatus
-            // 
-            OrderStatus.HeaderText = "Order Status";
-            OrderStatus.Name = "OrderStatus";
-            OrderStatus.ReadOnly = true;
-            OrderStatus.Resizable = DataGridViewTriState.True;
-            OrderStatus.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Fullname
-            // 
-            Fullname.HeaderText = "Customer Fullname";
-            Fullname.Name = "Fullname";
-            Fullname.ReadOnly = true;
-            Fullname.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Fullname.Width = 200;
-            // 
-            // DeliveryAddress
-            // 
-            DeliveryAddress.HeaderText = "Delivery Address";
-            DeliveryAddress.Name = "DeliveryAddress";
-            DeliveryAddress.ReadOnly = true;
-            DeliveryAddress.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Amount
-            // 
-            Amount.HeaderText = "Amount";
-            Amount.Name = "Amount";
-            Amount.ReadOnly = true;
-            Amount.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // OrdersLabel
-            // 
-            OrdersLabel.AutoSize = true;
-            OrdersLabel.Dock = DockStyle.Top;
-            OrdersLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            OrdersLabel.Location = new Point(3, 3);
-            OrdersLabel.Margin = new Padding(3);
-            OrdersLabel.Name = "OrdersLabel";
-            OrdersLabel.Padding = new Padding(3);
-            OrdersLabel.Size = new Size(45, 21);
-            OrdersLabel.TabIndex = 2;
-            OrdersLabel.Text = "Items";
+            OrdersTableLayoutPanel.ColumnCount = 2;
+            OrdersTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55.1848526F));
+            OrdersTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44.8151474F));
+            OrdersTableLayoutPanel.Controls.Add(OrderInfoPanel, 1, 0);
+            OrdersTableLayoutPanel.Controls.Add(ItemsControlPanel, 0, 0);
+            OrdersTableLayoutPanel.Dock = DockStyle.Fill;
+            OrdersTableLayoutPanel.Location = new Point(0, 0);
+            OrdersTableLayoutPanel.MinimumSize = new Size(500, 0);
+            OrdersTableLayoutPanel.Name = "OrdersTableLayoutPanel";
+            OrdersTableLayoutPanel.RowCount = 1;
+            OrdersTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            OrdersTableLayoutPanel.Size = new Size(1109, 612);
+            OrdersTableLayoutPanel.TabIndex = 1;
             // 
             // OrdersTab
             // 
@@ -382,21 +383,37 @@ namespace ObjectOrientedPractics.View.Tabs
             Controls.Add(OrdersTableLayoutPanel);
             Name = "OrdersTab";
             Size = new Size(1109, 612);
-            OrdersTableLayoutPanel.ResumeLayout(false);
+            ItemsControlPanel.ResumeLayout(false);
+            ItemsControlPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).EndInit();
             OrderInfoPanel.ResumeLayout(false);
             OrderInfoPanel.PerformLayout();
             PriorityPanel.ResumeLayout(false);
             PriorityPanel.PerformLayout();
-            ItemsControlPanel.ResumeLayout(false);
-            ItemsControlPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).EndInit();
+            OrdersTableLayoutPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private TableLayoutPanel OrdersTableLayoutPanel;
+        private DataGridViewTextBoxColumn Address;
+        private Panel ItemsControlPanel;
+        private DataGridView OrdersDataGridView;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Created;
+        private DataGridViewTextBoxColumn OrderStatus;
+        private DataGridViewTextBoxColumn Fullname;
+        private DataGridViewTextBoxColumn DeliveryAddress;
+        private DataGridViewTextBoxColumn Amount;
+        private Label OrdersLabel;
         private Panel OrderInfoPanel;
+        private Panel PriorityPanel;
+        private ComboBox DesiredTimeComboBox;
+        private Label DesiredTimeLabel;
+        private Label PriorityOptionsLabel;
+        private Label FinalAmountLabel;
+        private Label AmountLabel;
+        private ListBox OrderItemsListBox;
+        private Controls.AddressControl AddressControl;
         private ComboBox StatusComboBox;
         private Label StatusLabel;
         private TextBox IdTextBox;
@@ -405,23 +422,6 @@ namespace ObjectOrientedPractics.View.Tabs
         private Label CreatedLabel;
         private Label IdLabel;
         private Label SelectedOrderLabel;
-        private Panel ItemsControlPanel;
-        private Label OrdersLabel;
-        private DataGridView OrdersDataGridView;
-        private Controls.AddressControl AddressControl;
-        private ListBox OrderItemsListBox;
-        private Label FinalAmountLabel;
-        private Label AmountLabel;
-        private DataGridViewTextBoxColumn Address;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Created;
-        private DataGridViewTextBoxColumn OrderStatus;
-        private DataGridViewTextBoxColumn Fullname;
-        private DataGridViewTextBoxColumn DeliveryAddress;
-        private DataGridViewTextBoxColumn Amount;
-        private Panel PriorityPanel;
-        private ComboBox DesiredTimeComboBox;
-        private Label DesiredTimeLabel;
-        private Label PriorityOptionsLabel;
+        private TableLayoutPanel OrdersTableLayoutPanel;
     }
 }
