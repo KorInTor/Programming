@@ -20,7 +20,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Время оформления заказа.
         /// </summary>
-        private DateOnly _date;
+        private DateTime _date;
 
         /// <summary>
         /// Адрес доставки.
@@ -71,7 +71,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает дату оформления заказа.
         /// </summary>
-        public DateOnly Date
+        public DateTime Date
         {
             get
             {
@@ -139,7 +139,7 @@ namespace ObjectOrientedPractics.Model
             Address = address;
             Items = items;
             _id = IdGenerator.GetNextId();
-            _date = DateOnly.FromDateTime(DateTime.Now);
+            _date = DateTime.Now;
             _status = OrderStatus.New;
         }
     }

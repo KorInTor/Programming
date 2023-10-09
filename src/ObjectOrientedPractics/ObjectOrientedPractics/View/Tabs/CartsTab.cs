@@ -73,6 +73,7 @@ namespace ObjectOrientedPractics.View.Tabs
         public void RefreshData()
         {
             CurrentCustomer = new Customer();
+            CustomerComboBox.SelectedIndex = -1;
             InitItemsListBox();
             InitCustomerComboBox();
             InitCartContent();
@@ -168,7 +169,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            CurrentCustomer.Orders.Add(new Order(CurrentCustomer.Address, CurrentCustomer.Cart.Items));
+            CurrentCustomer.Orders.Add(new Order(CurrentCustomer.Address, new List<Item>(CurrentCustomer.Cart.Items)));
             CurrentCustomer.Cart.Items.Clear();
             InitCartContent();
         }
