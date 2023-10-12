@@ -38,11 +38,14 @@
             CartsTab = new View.Tabs.CartsTab();
             OrdersTabPage = new TabPage();
             OrdersTab = new View.Tabs.OrdersTab();
+            TEST = new TabPage();
+            percentDiscountsTab1 = new View.Tabs.PercentDiscountsTab();
             CustomersTabPage.SuspendLayout();
             ItemsTabPage.SuspendLayout();
             TabControl.SuspendLayout();
             CartsTabPage.SuspendLayout();
             OrdersTabPage.SuspendLayout();
+            TEST.SuspendLayout();
             SuspendLayout();
             // 
             // CustomersTabPage
@@ -89,6 +92,7 @@
             TabControl.Controls.Add(CustomersTabPage);
             TabControl.Controls.Add(CartsTabPage);
             TabControl.Controls.Add(OrdersTabPage);
+            TabControl.Controls.Add(TEST);
             TabControl.Dock = DockStyle.Fill;
             TabControl.Location = new Point(0, 0);
             TabControl.Name = "TabControl";
@@ -136,6 +140,25 @@
             OrdersTab.Size = new Size(947, 499);
             OrdersTab.TabIndex = 0;
             // 
+            // TEST
+            // 
+            TEST.Controls.Add(percentDiscountsTab1);
+            TEST.Location = new Point(4, 24);
+            TEST.Name = "TEST";
+            TEST.Padding = new Padding(3);
+            TEST.Size = new Size(953, 505);
+            TEST.TabIndex = 4;
+            TEST.Text = "Test Page";
+            TEST.UseVisualStyleBackColor = true;
+            // 
+            // percentDiscountsTab1
+            // 
+            percentDiscountsTab1.Dock = DockStyle.Fill;
+            percentDiscountsTab1.Location = new Point(3, 3);
+            percentDiscountsTab1.Name = "percentDiscountsTab1";
+            percentDiscountsTab1.Size = new Size(947, 499);
+            percentDiscountsTab1.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -150,6 +173,7 @@
             TabControl.ResumeLayout(false);
             CartsTabPage.ResumeLayout(false);
             OrdersTabPage.ResumeLayout(false);
+            TEST.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -164,5 +188,7 @@
         private View.Tabs.CartsTab CartsTab;
         private TabPage OrdersTabPage;
         private View.Tabs.OrdersTab OrdersTab;
+        private TabPage TEST;
+        private View.Tabs.PercentDiscountsTab percentDiscountsTab1;
     }
 }
