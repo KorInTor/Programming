@@ -148,12 +148,12 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
 
         public void Clear()
         {
-            IndexTextBox.Clear();
-            CountryTextBox.Clear();
-            CityTextBox.Clear();
-            StreetTextBox.Clear();
-            BuildingTextBox.Clear();
-            ApartmentTextBox.Clear();
+            IndexTextBox.Text = "111111";
+            CountryTextBox.Text = "";
+            CityTextBox.Text = "";
+            StreetTextBox.Text = "";
+            BuildingTextBox.Text = "";
+            ApartmentTextBox.Text = "";
 
             IndexTextBox.BackColor = Color.White;
             CountryTextBox.BackColor = Color.White;
