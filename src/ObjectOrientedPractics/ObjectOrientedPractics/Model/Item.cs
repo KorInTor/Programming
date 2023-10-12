@@ -1,4 +1,5 @@
-﻿using ObjectOrientedPractics.Service;
+﻿using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,7 +104,7 @@ namespace ObjectOrientedPractics.Model
         /// <param name="name">Имя товара. Должно быть не более 200 символов.</param>
         /// <param name="info">Информация о товаре. Должна быть не более 1000 символов.</param>
         /// <param name="cost">Стоимость товара. Должна быть в пределах от 0 до 100000 символов.</param>
-        /// <param name="category">Категория товара. Одно из значение <see cref="Model.Category"/>.</param>
+        /// <param name="category">Категория товара. Одно из значение <see cref="Enums.Category"/>.</param>
         public Item(string name, string info, double cost, Category category)
         {
             Name = name;

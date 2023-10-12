@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Enums;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Discounts
 {
     /// <summary>
     /// Хранит процентную скидку на конктретную категорию товаров.
     /// </summary>
-    public class PercentDiscount
+    public class PercentDiscount : IDiscount
     {
         /// <summary>
         /// Сумма которую покупатель уже потратил.
@@ -33,7 +34,7 @@ namespace ObjectOrientedPractics.Model
         {
             get
             {
-                return ($"Процентная скидка на {Category} - {Discount}%");
+                return $"Процентная скидка на {Category} - {Discount}%";
             }
         }
 
@@ -52,7 +53,7 @@ namespace ObjectOrientedPractics.Model
                     amount = amount + (int)Math.Round(item.Cost);
                 }
             }
-            return amount * ((double) Discount/100);
+            return amount * ((double)Discount / 100);
         }
 
         /// <summary>

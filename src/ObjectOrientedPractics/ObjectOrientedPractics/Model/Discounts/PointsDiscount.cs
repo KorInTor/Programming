@@ -5,12 +5,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Discounts
 {
     /// <summary>
     /// Хранит информацию о накопительных баллах.
     /// </summary>
-    public class PointsDiscount
+    public class PointsDiscount : IDiscount
     {
         /// <summary>
         /// Количество накопленных баллов.
@@ -20,12 +20,12 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает количество накопленных баллов для UI в виде строки;
         /// </summary>
-        public string Info 
-        { 
+        public string Info
+        {
             get
             {
-                return ($"Накопительная – {Points} баллов");
-            } 
+                return $"Накопительная – {Points} баллов";
+            }
         }
 
         /// <summary>
@@ -40,9 +40,9 @@ namespace ObjectOrientedPractics.Model
             {
                 amount = amount + (int)Math.Round(item.Cost);
             }
-            if (Points  > amount * 0.3)
+            if (Points > amount * 0.3)
             {
-                return Math.Round(amount*0.30);
+                return Math.Round(amount * 0.30);
             }
             return Points;
         }

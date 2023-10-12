@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Приоритетный заказ.
     /// </summary>
-    public class PriorityOrder:Order
+    public class PriorityOrder : Order
     {
         /// <summary>
         /// Желаемая дата доставки.
@@ -24,7 +24,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задаёт желаемую дату доставки.
         /// </summary>
-        public DateTime DesiredDeliveryDate 
+        public DateTime DesiredDeliveryDate
         {
             get
             {
@@ -39,7 +39,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задаёт желаемое время доставки.
         /// </summary>
-        public string DesiredDeliveryTime 
+        public string DesiredDeliveryTime
         {
             get
             {
