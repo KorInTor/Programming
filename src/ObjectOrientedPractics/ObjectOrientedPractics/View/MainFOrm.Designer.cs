@@ -36,8 +36,8 @@
             TabControl = new TabControl();
             CartsTabPage = new TabPage();
             CartsTab = new View.Tabs.CartsTab();
-            OrdersTabPage = new TabPage();
             OrdersTab = new View.Tabs.OrdersTab();
+            OrdersTabPage = new TabPage();
             CustomersTabPage.SuspendLayout();
             ItemsTabPage.SuspendLayout();
             TabControl.SuspendLayout();
@@ -110,11 +110,21 @@
             // 
             // CartsTab
             // 
+            CartsTab.BackColor = Color.Transparent;
             CartsTab.Dock = DockStyle.Fill;
             CartsTab.Location = new Point(3, 3);
             CartsTab.Name = "CartsTab";
             CartsTab.Size = new Size(947, 499);
             CartsTab.TabIndex = 0;
+            // 
+            // OrdersTab
+            // 
+            OrdersTab.Customers = null;
+            OrdersTab.Dock = DockStyle.Fill;
+            OrdersTab.Location = new Point(3, 3);
+            OrdersTab.Name = "OrdersTab";
+            OrdersTab.Size = new Size(947, 499);
+            OrdersTab.TabIndex = 0;
             // 
             // OrdersTabPage
             // 
@@ -126,15 +136,6 @@
             OrdersTabPage.TabIndex = 3;
             OrdersTabPage.Text = "Orders";
             OrdersTabPage.UseVisualStyleBackColor = true;
-            // 
-            // OrdersTab
-            // 
-            OrdersTab.Customers = null;
-            OrdersTab.Dock = DockStyle.Fill;
-            OrdersTab.Location = new Point(3, 3);
-            OrdersTab.Name = "OrdersTab";
-            OrdersTab.Size = new Size(947, 499);
-            OrdersTab.TabIndex = 0;
             // 
             // MainForm
             // 

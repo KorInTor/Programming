@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Orders;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ObjectOrientedPractics.View.Tabs
@@ -29,7 +30,6 @@ namespace ObjectOrientedPractics.View.Tabs
         /// Поле для работы с покупателем.
         /// </summary>
         private Customer CurrentCustomer { get; set; } = new Customer();
-
         /// <summary>
         /// Вовзращает и задёт список покупателей в <see cref="CartsTab"/>
         /// </summary>
@@ -126,6 +126,46 @@ namespace ObjectOrientedPractics.View.Tabs
             FinalAmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
         }
 
+        /// <summary>
+        /// Инициализирует список <see cref="DiscountsChekedListBox"/> значениями из <see cref="CurrentCustomer"/>.
+        /// </summary>
+        private void InitDiscountList()
+        {
+            DiscountsChekedListBox.Items.Clear();
+            foreach (IDiscount discount in CurrentCustomer.Discounts)
+            {
+                var listItem = DiscountsChekedListBox.Items.Add(discount.Info);
+                DiscountsChekedListBox.SetItemChecked(listItem, true);
+            }
+        }
+
+        /// <summary>
+        /// Обновляет <see cref="TotalAmountLabel"/> и <see cref="DiscountAmountLabel"/> в зависимости от отмеченных скидок в <see cref="DiscountsChekedListBox"/>.
+        /// </summary>
+        private void UpdateTotalPriceUI()
+        {
+            List<string> checkedItems = new List<string>();
+
+            double Discount = 0;
+
+            foreach (var item in DiscountsChekedListBox.CheckedItems)
+                checkedItems.Add(item.ToString());
+
+            foreach (string item in checkedItems)
+            {
+                foreach (IDiscount discount in CurrentCustomer.Discounts)
+                {
+                    if (discount.Info == item)
+                    {
+                        Discount += discount.Calculate(CurrentCustomer.Cart.Items);
+                    }
+                }
+            }
+
+            DiscountAmountLabel.Text = Discount.ToString();
+            TotalAmountLabel.Text = (CurrentCustomer.Cart.Amount - Discount).ToString();
+        }
+
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CustomerComboBox.SelectedIndex == -1)
@@ -135,6 +175,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             CurrentCustomer = Customers[CustomerComboBox.SelectedIndex];
             InitCartContent();
+            InitDiscountList();
         }
 
         private void AddToCartButton_Click(object sender, EventArgs e)
@@ -145,6 +186,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             CurrentCustomer.Cart.Items.Add(Items[ItemsListBox.SelectedIndex]);
             InitCartContent();
+            UpdateTotalPriceUI();
         }
 
         private void RemoveItemButton_Click(object sender, EventArgs e)
@@ -155,6 +197,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             CurrentCustomer.Cart.Items.RemoveAt(CartContentListBox.SelectedIndex);
             InitCartContent();
+            UpdateTotalPriceUI();
         }
 
         private void ClearCartButton_Click(object sender, EventArgs e)
@@ -165,20 +208,57 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             CurrentCustomer.Cart.Items.Clear();
             InitCartContent();
+            UpdateTotalPriceUI();
         }
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             if (CurrentCustomer.IsPriority)
             {
-                CurrentCustomer.Orders.Add(new PriorityOrder(CurrentCustomer.Address, new List<Item>(CurrentCustomer.Cart.Items),DateTime.Now,""));
+                CurrentCustomer.Orders.Add(new PriorityOrder(CurrentCustomer.Address, new List<Item>(CurrentCustomer.Cart.Items), DateTime.Now, ""));
             }
             else
             {
                 CurrentCustomer.Orders.Add(new Order(CurrentCustomer.Address, new List<Item>(CurrentCustomer.Cart.Items)));
             }
+            foreach (IDiscount discount in CurrentCustomer.Discounts)
+            {
+                CurrentCustomer.Orders.Last().DiscountAmount += discount.Apply(CurrentCustomer.Cart.Items);
+                discount.Update(CurrentCustomer.Cart.Items);
+            }
             CurrentCustomer.Cart.Items.Clear();
+            InitDiscountList();
+            UpdateTotalPriceUI();
             InitCartContent();
+        }
+
+        private void DiscountsChekedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            List<string> checkedItems = new List<string>();
+
+            double Discount = 0;
+
+            foreach (var item in DiscountsChekedListBox.CheckedItems)
+                checkedItems.Add(item.ToString());
+
+            if (e.NewValue == CheckState.Checked)
+                checkedItems.Add(DiscountsChekedListBox.Items[e.Index].ToString());
+            else
+                checkedItems.Remove(DiscountsChekedListBox.Items[e.Index].ToString());
+
+            foreach (string item in checkedItems)
+            {
+                foreach (IDiscount discount in CurrentCustomer.Discounts)
+                {
+                    if (discount.Info == item)
+                    {
+                        Discount += discount.Calculate(CurrentCustomer.Cart.Items);
+                    }
+                }
+            }
+
+            DiscountAmountLabel.Text = Discount.ToString();
+            TotalAmountLabel.Text = (CurrentCustomer.Cart.Amount - Discount).ToString();
         }
     }
 }

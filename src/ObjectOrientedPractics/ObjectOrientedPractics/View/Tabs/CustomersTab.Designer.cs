@@ -31,6 +31,10 @@
             Model.Address address1 = new Model.Address();
             CustmerTableLayoutPanel = new TableLayoutPanel();
             CustomersInfoPanel = new Panel();
+            RemoveDiscount = new Button();
+            AddDiscountButton = new Button();
+            DiscountsListBox = new ListBox();
+            DiscountsLabel = new Label();
             PriorityCheckBox = new CheckBox();
             AddressControl = new Controls.AddressControl();
             IdTextBox = new TextBox();
@@ -63,12 +67,16 @@
             CustmerTableLayoutPanel.Name = "CustmerTableLayoutPanel";
             CustmerTableLayoutPanel.RowCount = 1;
             CustmerTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            CustmerTableLayoutPanel.Size = new Size(879, 382);
+            CustmerTableLayoutPanel.Size = new Size(919, 541);
             CustmerTableLayoutPanel.TabIndex = 0;
             // 
             // CustomersInfoPanel
             // 
             CustomersInfoPanel.BackColor = SystemColors.Window;
+            CustomersInfoPanel.Controls.Add(RemoveDiscount);
+            CustomersInfoPanel.Controls.Add(AddDiscountButton);
+            CustomersInfoPanel.Controls.Add(DiscountsListBox);
+            CustomersInfoPanel.Controls.Add(DiscountsLabel);
             CustomersInfoPanel.Controls.Add(PriorityCheckBox);
             CustomersInfoPanel.Controls.Add(AddressControl);
             CustomersInfoPanel.Controls.Add(IdTextBox);
@@ -77,11 +85,50 @@
             CustomersInfoPanel.Controls.Add(IdLabel);
             CustomersInfoPanel.Controls.Add(SelectedCustomerLabel);
             CustomersInfoPanel.Dock = DockStyle.Fill;
-            CustomersInfoPanel.Location = new Point(398, 3);
+            CustomersInfoPanel.Location = new Point(416, 3);
             CustomersInfoPanel.Name = "CustomersInfoPanel";
             CustomersInfoPanel.Padding = new Padding(3);
-            CustomersInfoPanel.Size = new Size(478, 376);
+            CustomersInfoPanel.Size = new Size(500, 535);
             CustomersInfoPanel.TabIndex = 0;
+            // 
+            // RemoveDiscount
+            // 
+            RemoveDiscount.Location = new Point(371, 365);
+            RemoveDiscount.Name = "RemoveDiscount";
+            RemoveDiscount.Size = new Size(75, 33);
+            RemoveDiscount.TabIndex = 15;
+            RemoveDiscount.Text = "Remove";
+            RemoveDiscount.UseVisualStyleBackColor = true;
+            RemoveDiscount.Click += RemoveDiscount_Click;
+            // 
+            // AddDiscountButton
+            // 
+            AddDiscountButton.Location = new Point(371, 304);
+            AddDiscountButton.Name = "AddDiscountButton";
+            AddDiscountButton.Size = new Size(75, 33);
+            AddDiscountButton.TabIndex = 14;
+            AddDiscountButton.Text = "Add";
+            AddDiscountButton.UseVisualStyleBackColor = true;
+            AddDiscountButton.Click += AddDiscountButton_Click;
+            // 
+            // DiscountsListBox
+            // 
+            DiscountsListBox.FormattingEnabled = true;
+            DiscountsListBox.ItemHeight = 15;
+            DiscountsListBox.Location = new Point(6, 304);
+            DiscountsListBox.Name = "DiscountsListBox";
+            DiscountsListBox.Size = new Size(359, 94);
+            DiscountsListBox.TabIndex = 13;
+            // 
+            // DiscountsLabel
+            // 
+            DiscountsLabel.AutoSize = true;
+            DiscountsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            DiscountsLabel.Location = new Point(6, 286);
+            DiscountsLabel.Name = "DiscountsLabel";
+            DiscountsLabel.Size = new Size(61, 15);
+            DiscountsLabel.TabIndex = 1;
+            DiscountsLabel.Text = "Discounts";
             // 
             // PriorityCheckBox
             // 
@@ -122,7 +169,7 @@
             FullnameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             FullnameTextBox.Location = new Point(76, 72);
             FullnameTextBox.Name = "FullnameTextBox";
-            FullnameTextBox.Size = new Size(396, 23);
+            FullnameTextBox.Size = new Size(418, 23);
             FullnameTextBox.TabIndex = 8;
             FullnameTextBox.TextChanged += FullnameTextBox_TextChanged;
             // 
@@ -174,7 +221,7 @@
             CustomersControlPanel.MinimumSize = new Size(100, 0);
             CustomersControlPanel.Name = "CustomersControlPanel";
             CustomersControlPanel.Padding = new Padding(3);
-            CustomersControlPanel.Size = new Size(387, 376);
+            CustomersControlPanel.Size = new Size(405, 535);
             CustomersControlPanel.TabIndex = 1;
             // 
             // CustomersListBox
@@ -185,7 +232,7 @@
             CustomersListBox.ItemHeight = 15;
             CustomersListBox.Location = new Point(3, 24);
             CustomersListBox.Name = "CustomersListBox";
-            CustomersListBox.Size = new Size(381, 297);
+            CustomersListBox.Size = new Size(399, 456);
             CustomersListBox.TabIndex = 1;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             // 
@@ -211,12 +258,12 @@
             buttonsTableLayoutPanel.Controls.Add(AddCustomerButton, 0, 0);
             buttonsTableLayoutPanel.Controls.Add(RemoveCustomerButton, 1, 0);
             buttonsTableLayoutPanel.Dock = DockStyle.Bottom;
-            buttonsTableLayoutPanel.Location = new Point(3, 321);
+            buttonsTableLayoutPanel.Location = new Point(3, 480);
             buttonsTableLayoutPanel.Name = "buttonsTableLayoutPanel";
             buttonsTableLayoutPanel.Padding = new Padding(3);
             buttonsTableLayoutPanel.RowCount = 1;
             buttonsTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            buttonsTableLayoutPanel.Size = new Size(381, 52);
+            buttonsTableLayoutPanel.Size = new Size(399, 52);
             buttonsTableLayoutPanel.TabIndex = 0;
             // 
             // AddCustomerButton
@@ -226,7 +273,7 @@
             AddCustomerButton.Location = new Point(6, 6);
             AddCustomerButton.Name = "AddCustomerButton";
             AddCustomerButton.Padding = new Padding(3);
-            AddCustomerButton.Size = new Size(119, 40);
+            AddCustomerButton.Size = new Size(124, 40);
             AddCustomerButton.TabIndex = 1;
             AddCustomerButton.Text = "Add";
             AddCustomerButton.UseVisualStyleBackColor = true;
@@ -236,10 +283,10 @@
             // 
             RemoveCustomerButton.Dock = DockStyle.Fill;
             RemoveCustomerButton.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            RemoveCustomerButton.Location = new Point(131, 6);
+            RemoveCustomerButton.Location = new Point(136, 6);
             RemoveCustomerButton.Name = "RemoveCustomerButton";
             RemoveCustomerButton.Padding = new Padding(3);
-            RemoveCustomerButton.Size = new Size(119, 40);
+            RemoveCustomerButton.Size = new Size(124, 40);
             RemoveCustomerButton.TabIndex = 0;
             RemoveCustomerButton.Text = "Remove";
             RemoveCustomerButton.UseVisualStyleBackColor = true;
@@ -251,7 +298,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(CustmerTableLayoutPanel);
             Name = "CustomersTab";
-            Size = new Size(879, 382);
+            Size = new Size(919, 541);
             CustmerTableLayoutPanel.ResumeLayout(false);
             CustomersInfoPanel.ResumeLayout(false);
             CustomersInfoPanel.PerformLayout();
@@ -278,5 +325,10 @@
         private TextBox FullnameTextBox;
         private Controls.AddressControl AddressControl;
         private CheckBox PriorityCheckBox;
+        private Button button2;
+        private Button AddDiscountButton;
+        private ListBox DiscountsListBox;
+        private Label DiscountsLabel;
+        private Button RemoveDiscount;
     }
 }

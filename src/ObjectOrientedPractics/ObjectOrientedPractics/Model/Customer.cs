@@ -1,4 +1,6 @@
-﻿using ObjectOrientedPractics.Service;
+﻿using ObjectOrientedPractics.Model.Orders;
+using ObjectOrientedPractics.Service;
+using ObjectOrientedPractics.Model.Discounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +38,26 @@ namespace ObjectOrientedPractics.Model
         /// Список заказов.
         /// </summary>
         private List<Order> _orders;
+
+        /// <summary>
+        /// Cписок скидок покупателя.
+        /// </summary>
+        private List<IDiscount> _discounts { get; set; }
+
+        /// <summary>
+        /// Возвращает и задаёт список скидок покупателя.
+        /// </summary>
+        public List<IDiscount> Discounts 
+        { 
+            get
+            {
+                return _discounts;
+            }
+            set 
+            { 
+                _discounts = value;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задаёт список заказов покупателя.
@@ -127,6 +149,7 @@ namespace ObjectOrientedPractics.Model
             Cart = new Cart();
             Orders = new List<Order>();
             IsPriority = false;
+            Discounts = new List<IDiscount> { new PointsDiscount()};
         }
 
         /// <summary>

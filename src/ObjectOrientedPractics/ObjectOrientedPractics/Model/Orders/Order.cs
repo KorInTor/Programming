@@ -1,11 +1,12 @@
-﻿using ObjectOrientedPractics.Service;
+﻿using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Хранит информацию о заказе.
@@ -37,6 +38,18 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         private List<Item> _items;
 
+        /// <summary>
+        /// Размер скидки.
+        /// </summary>
+        public double DiscountAmount { get; set; }
+
+        public double Total
+        {
+            get
+            {
+                return Amount - DiscountAmount;
+            }
+        }
         /// <summary>
         /// Возвращает сумму цен всех товаров. Если <see cref="Items"/> пуст или равен null то возвращает 0.
         /// </summary>
@@ -93,7 +106,7 @@ namespace ObjectOrientedPractics.Model
                 _address = value;
             }
         }
-        
+
         /// <summary>
         /// Возвращает и задаёт статус заказа.
         /// </summary>

@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.Forms;
 using ObjectOrientedPractics.View.Tabs.Controls;
+using ObjectOrientedPractics.Model.Discounts;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -75,6 +77,7 @@ namespace ObjectOrientedPractics.View.Tabs
             AddressControl.Address = _selectedCustomer.Address;
             FullnameTextBox.Text = _selectedCustomer.Fullname;
             IdTextBox.Text = _selectedCustomer.Id.ToString();
+
             if (_selectedCustomer.IsPriority)
             {
                 PriorityCheckBox.Checked = true;
@@ -82,6 +85,12 @@ namespace ObjectOrientedPractics.View.Tabs
             else
             {
                 PriorityCheckBox.Checked = false;
+            }
+
+            DiscountsListBox.Items.Clear();
+            foreach (IDiscount discount in _selectedCustomer.Discounts)
+            {
+                DiscountsListBox.Items.Add(discount.Info);
             }
         }
 
@@ -112,6 +121,7 @@ namespace ObjectOrientedPractics.View.Tabs
             FullnameTextBox.Clear();
             AddressControl.Clear();
             _customers.RemoveAt(CustomersListBox.SelectedIndex);
+            DiscountsListBox.Items.Clear();
             _selectedCustomer = null;
             SortCustomersList();
         }
@@ -150,6 +160,42 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _selectedCustomer.IsPriority = false;
             }
+        }
+
+        private void AddDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex == -1 || _selectedCustomer == null) 
+            {
+                return;
+            }
+            using (var popup = new AddDiscountForm())
+            {
+                var result = popup.ShowDialog();
+                if (result != DialogResult.OK)
+                {
+                    return;
+                }
+                PercentDiscount discount = new PercentDiscount();
+                discount.Category = popup.SelectedCategory;
+                _selectedCustomer.Discounts.Add(discount);
+                UpdateUIInfo();
+            }
+        }
+
+        private void RemoveDiscount_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex == -1 || _selectedCustomer == null)
+            {
+                return;
+            }
+            if (DiscountsListBox.SelectedIndex == 0)
+            {
+                ToolTip toolTip = new ToolTip();
+                toolTip.Show("Накопительную скидку удалить нельзя", this.DiscountsListBox);
+                return;
+            }
+            _selectedCustomer.Discounts.RemoveAt(DiscountsListBox.SelectedIndex);
+            UpdateUIInfo();
         }
     }
 }

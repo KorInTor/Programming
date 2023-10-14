@@ -40,6 +40,7 @@ namespace ObjectOrientedPractics.View.Tabs
             Fullname = new DataGridViewTextBoxColumn();
             DeliveryAddress = new DataGridViewTextBoxColumn();
             Amount = new DataGridViewTextBoxColumn();
+            Total = new DataGridViewTextBoxColumn();
             OrdersLabel = new Label();
             OrderInfoPanel = new Panel();
             PriorityPanel = new Panel();
@@ -85,7 +86,7 @@ namespace ObjectOrientedPractics.View.Tabs
             OrdersDataGridView.AllowUserToDeleteRows = false;
             OrdersDataGridView.AllowUserToResizeRows = false;
             OrdersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { Id, Created, OrderStatus, Fullname, DeliveryAddress, Amount });
+            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { Id, Created, OrderStatus, Fullname, DeliveryAddress, Amount, Total });
             OrdersDataGridView.Dock = DockStyle.Fill;
             OrdersDataGridView.Location = new Point(3, 24);
             OrdersDataGridView.MultiSelect = false;
@@ -141,6 +142,12 @@ namespace ObjectOrientedPractics.View.Tabs
             Amount.Name = "Amount";
             Amount.ReadOnly = true;
             Amount.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Total
+            // 
+            Total.HeaderText = "Total";
+            Total.Name = "Total";
+            Total.ReadOnly = true;
             // 
             // OrdersLabel
             // 
@@ -423,5 +430,6 @@ namespace ObjectOrientedPractics.View.Tabs
         private Label IdLabel;
         private Label SelectedOrderLabel;
         private TableLayoutPanel OrdersTableLayoutPanel;
+        private DataGridViewTextBoxColumn Total;
     }
 }

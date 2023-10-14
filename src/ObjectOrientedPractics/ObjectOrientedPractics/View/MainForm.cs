@@ -1,6 +1,7 @@
 using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Service;
 using ObjectOrientedPractics.View.Tabs;
+using System;
 
 namespace ObjectOrientedPractics
 {
@@ -25,13 +26,13 @@ namespace ObjectOrientedPractics
                     _store.Items.Add(ItemFactory.CreateRandomItem());
                     _store.Customers.Add(CustomerFactory.CreateRandomCustomer());
                 }
-                foreach (Customer customer in _store.Customers)
-                {
-                    for (int i = 0; i <= _random.Next(1, 10); i++)
-                    {
-                        customer.Orders.Add(OrderFactory.CreateRandomOrder(customer, _store.Items, _random.Next(1, 10)));
-                    }
-                }
+                //foreach (Customer customer in _store.Customers)
+                //{
+                //    for (int i = 0; i <= _random.Next(1, 10); i++)
+                //    {
+                //        customer.Orders.Add(OrderFactory.CreateRandomOrder(customer, _store.Items, _random.Next(1, 10)));
+                //    }
+                //}
             }
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;
