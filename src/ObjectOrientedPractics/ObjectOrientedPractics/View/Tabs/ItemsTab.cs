@@ -14,7 +14,7 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
-        
+
         List<Item> _items = new();
 
         private Item _selectedItem = null;
@@ -96,9 +96,9 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void InitCategoryComboBox()
         {
-            foreach (var season in Enum.GetValues(typeof(Category)))
+            foreach (var category in Enum.GetValues(typeof(Category)))
             {
-                CategoryComboBox.Items.Add(season);
+                CategoryComboBox.Items.Add(category);
             }
         }
 

@@ -36,16 +36,13 @@
             TabControl = new TabControl();
             CartsTabPage = new TabPage();
             CartsTab = new View.Tabs.CartsTab();
-            OrdersTabPage = new TabPage();
             OrdersTab = new View.Tabs.OrdersTab();
-            TEST = new TabPage();
-            percentDiscountsTab1 = new View.Tabs.PercentDiscountsTab();
+            OrdersTabPage = new TabPage();
             CustomersTabPage.SuspendLayout();
             ItemsTabPage.SuspendLayout();
             TabControl.SuspendLayout();
             CartsTabPage.SuspendLayout();
             OrdersTabPage.SuspendLayout();
-            TEST.SuspendLayout();
             SuspendLayout();
             // 
             // CustomersTabPage
@@ -92,7 +89,6 @@
             TabControl.Controls.Add(CustomersTabPage);
             TabControl.Controls.Add(CartsTabPage);
             TabControl.Controls.Add(OrdersTabPage);
-            TabControl.Controls.Add(TEST);
             TabControl.Dock = DockStyle.Fill;
             TabControl.Location = new Point(0, 0);
             TabControl.Name = "TabControl";
@@ -114,11 +110,21 @@
             // 
             // CartsTab
             // 
+            CartsTab.BackColor = Color.Transparent;
             CartsTab.Dock = DockStyle.Fill;
             CartsTab.Location = new Point(3, 3);
             CartsTab.Name = "CartsTab";
             CartsTab.Size = new Size(947, 499);
             CartsTab.TabIndex = 0;
+            // 
+            // OrdersTab
+            // 
+            OrdersTab.Customers = null;
+            OrdersTab.Dock = DockStyle.Fill;
+            OrdersTab.Location = new Point(3, 3);
+            OrdersTab.Name = "OrdersTab";
+            OrdersTab.Size = new Size(947, 499);
+            OrdersTab.TabIndex = 0;
             // 
             // OrdersTabPage
             // 
@@ -130,34 +136,6 @@
             OrdersTabPage.TabIndex = 3;
             OrdersTabPage.Text = "Orders";
             OrdersTabPage.UseVisualStyleBackColor = true;
-            // 
-            // OrdersTab
-            // 
-            OrdersTab.Customers = null;
-            OrdersTab.Dock = DockStyle.Fill;
-            OrdersTab.Location = new Point(3, 3);
-            OrdersTab.Name = "OrdersTab";
-            OrdersTab.Size = new Size(947, 499);
-            OrdersTab.TabIndex = 0;
-            // 
-            // TEST
-            // 
-            TEST.Controls.Add(percentDiscountsTab1);
-            TEST.Location = new Point(4, 24);
-            TEST.Name = "TEST";
-            TEST.Padding = new Padding(3);
-            TEST.Size = new Size(953, 505);
-            TEST.TabIndex = 4;
-            TEST.Text = "Test Page";
-            TEST.UseVisualStyleBackColor = true;
-            // 
-            // percentDiscountsTab1
-            // 
-            percentDiscountsTab1.Dock = DockStyle.Fill;
-            percentDiscountsTab1.Location = new Point(3, 3);
-            percentDiscountsTab1.Name = "percentDiscountsTab1";
-            percentDiscountsTab1.Size = new Size(947, 499);
-            percentDiscountsTab1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -173,7 +151,6 @@
             TabControl.ResumeLayout(false);
             CartsTabPage.ResumeLayout(false);
             OrdersTabPage.ResumeLayout(false);
-            TEST.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -188,7 +165,5 @@
         private View.Tabs.CartsTab CartsTab;
         private TabPage OrdersTabPage;
         private View.Tabs.OrdersTab OrdersTab;
-        private TabPage TEST;
-        private View.Tabs.PercentDiscountsTab percentDiscountsTab1;
     }
 }

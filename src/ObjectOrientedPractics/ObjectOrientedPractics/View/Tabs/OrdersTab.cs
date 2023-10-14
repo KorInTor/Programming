@@ -52,7 +52,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 foreach (Order order in customer.Orders)
                 {
                     Orders.Add(order);
-                    OrdersDataGridView.Rows.Add(order.Id, order.Date, order.Status, customer.Fullname, order.Address.ToString(), order.Amount);
+                    OrdersDataGridView.Rows.Add(order.Id, order.Date, order.Status, customer.Fullname, order.Address.ToString(), order.Amount, order.Total);
                 }
             }
         }

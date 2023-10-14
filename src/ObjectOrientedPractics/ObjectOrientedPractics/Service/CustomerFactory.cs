@@ -83,7 +83,6 @@ namespace ObjectOrientedPractics.Service
         {
             string fullname = ($"{_secondNames[_random.Next(_secondNames.Length)]} {_firstNames[_random.Next(_firstNames.Length)]} {_surNames[_random.Next(_surNames.Length)]}");
             Address address = AddressFactory.CreateRandomAddress();
-
             return new Customer(fullname, address);
         }
     }

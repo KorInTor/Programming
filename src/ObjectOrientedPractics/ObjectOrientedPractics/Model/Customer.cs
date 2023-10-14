@@ -40,9 +40,24 @@ namespace ObjectOrientedPractics.Model
         private List<Order> _orders;
 
         /// <summary>
+        /// Cписок скидок покупателя.
+        /// </summary>
+        private List<IDiscount> _discounts { get; set; }
+
+        /// <summary>
         /// Возвращает и задаёт список скидок покупателя.
         /// </summary>
-        public List<IDiscount> Discounts { get; set; }
+        public List<IDiscount> Discounts 
+        { 
+            get
+            {
+                return _discounts;
+            }
+            set 
+            { 
+                _discounts = value;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задаёт список заказов покупателя.
