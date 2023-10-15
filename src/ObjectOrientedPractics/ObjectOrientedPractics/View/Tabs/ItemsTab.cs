@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Service;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -17,16 +18,19 @@ namespace ObjectOrientedPractics.View.Tabs
 
         List<Item> _items = new();
 
+        List<Item> _displayedItems = new();
+
         private Item _selectedItem = null;
 
         public ItemsTab()
         {
             InitializeComponent();
             InitCategoryComboBox();
+            OrderByComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
-        /// Возраващет и задаёт список товаров.После получения списка, соритрует <see cref="ItemsListBox"/>.
+        /// Возраващет и задаёт список товаров.
         /// </summary>
         public List<Item> Items
         {
@@ -37,29 +41,49 @@ namespace ObjectOrientedPractics.View.Tabs
             set
             {
                 _items = value;
-                SortItemsList();
+                _displayedItems = new List<Item>(_items);
+                DisplayItems();
             }
         }
 
         /// <summary>
-        /// Сортировка списка <see cref="_items"/> по свойству <see cref="Item.Name"/>.
+        /// Отображение и сортировка списка <see cref="_displayedItems"/>.
         /// </summary>
-        private void SortItemsList()
+        private void DisplayItems()
         {
-            if (_items == null)
+            _displayedItems = new List<Item>(_items);
+            if (_displayedItems == null)
             {
                 ItemsListBox.Items.Clear();
                 return;
             }
             ItemsListBox.Items.Clear();
-            _items.Sort((p1, p2) => p1.Name.CompareTo(p2.Name));
-            foreach (Item item in _items)
+            switch (OrderByComboBox.SelectedIndex)
             {
-                ItemsListBox.Items.Add($"{item.Name}");
+                case 0:
+                    _displayedItems = DataTools.SortItems(_displayedItems, DataTools.SortByNameDesc);
+                    break;
+                case 1:
+                    _displayedItems = DataTools.SortItems(_displayedItems, DataTools.SortByNameAsc);
+                    break;
+                case 2:
+                    _displayedItems = DataTools.SortItems(_displayedItems, DataTools.SortByCostDesc);
+                    break;
+                case 3:
+                    _displayedItems = DataTools.SortItems(_displayedItems, DataTools.SortByCostAsc);
+                    break;
+            }
+            if (FindTextBox.Text != "")
+            {
+                _displayedItems = DataTools.FilterItems(_displayedItems, (item) => { return item.Name.ToLower().Contains(FindTextBox.Text.ToLower()); });
+            }
+            foreach (Item item in _displayedItems)
+            {
+                ItemsListBox.Items.Add($"name: {item.Name}, cost: {item.Cost}");
             }
             if (_selectedItem != null)
             {
-                ItemsListBox.SelectedIndex = FindItemById();
+                ItemsListBox.SelectedIndex = FindItemById(_displayedItems, _selectedItem);
             }
         }
 
@@ -72,22 +96,23 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 return;
             }
-            _selectedItem = _items[ItemsListBox.SelectedIndex];
 
             NameTextBox.Text = _selectedItem.Name;
             CostTextBox.Text = _selectedItem.Cost.ToString();
             DescriptionTextBox.Text = _selectedItem.Info;
             IdTextBox.Text = _selectedItem.Id.ToString();
-            CategoryComboBox.SelectedItem = _selectedItem.Category;
+            CategoryComboBox.SelectedIndex = ((int)_selectedItem.Category - 1);
         }
 
         /// <summary>
-        /// Поиск индекса предмета в списке <see cref="_items"/> с Id совпадающим c <see cref="_selectedItem"/>.
+        /// Возвращает индекс элемента в списке товаров с совпадающим полем искомого товара Id.
         /// </summary>
-        /// <returns>Индекс элемента с совпадающим Id.</returns>
-        private int FindItemById()
+        /// <param name="listItems">Список товаров.</param>
+        /// <param name="item">Товар который нужно найти в списке.</param>
+        /// <returns>Индекс.</returns>
+        private int FindItemById(List<Item> listItems, Item item)
         {
-            int _index = _items.FindIndex(item => item.Id == _selectedItem.Id);
+            int _index = listItems.FindIndex(listItems => listItems.Id == item.Id);
             return _index;
         }
 
@@ -106,7 +131,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             var blankItem = new Item("Наименование", "Описание", 1, Category.Accessory);
             _items.Add(blankItem);
-            SortItemsList();
+            DisplayItems();
         }
 
         private void RemoveItemButton_Click(object sender, EventArgs e)
@@ -115,18 +140,19 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 return;
             }
+            _items.RemoveAt(FindItemById(_items, _selectedItem));
+            _selectedItem = null;
             IdTextBox.Clear();
             CostTextBox.Clear();
             DescriptionTextBox.Clear();
             NameTextBox.Clear();
             CategoryComboBox.SelectedItem = null;
-            _items.RemoveAt(ItemsListBox.SelectedIndex);
-            _selectedItem = null;
-            SortItemsList();
+            DisplayItems();
         }
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _selectedItem = _items[FindItemById(_items, _displayedItems[ItemsListBox.SelectedIndex])];
             UpdateTextBoxesInfo();
         }
 
@@ -134,13 +160,16 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (_selectedItem == null)
             {
+                CostTextBox.BackColor = Color.White;
                 return;
             }
             try
             {
                 CostTextBox.BackColor = Color.White;
+                if (_selectedItem.Cost == double.Parse(CostTextBox.Text))
+                    return;
                 _selectedItem.Cost = double.Parse(CostTextBox.Text);
-                _items[FindItemById()].Cost = _selectedItem.Cost;
+                DisplayItems();
             }
             catch (Exception exception)
             {
@@ -152,14 +181,16 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (_selectedItem == null)
             {
+                NameTextBox.BackColor = Color.White;
                 return;
             }
             try
             {
                 NameTextBox.BackColor = Color.White;
+                if (_selectedItem.Name == NameTextBox.Text)
+                    return;
                 _selectedItem.Name = NameTextBox.Text;
-                _items[FindItemById()].Name = _selectedItem.Name;
-                SortItemsList();
+                DisplayItems();
             }
             catch (Exception exception)
             {
@@ -171,13 +202,13 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (_selectedItem == null)
             {
+                DescriptionTextBox.BackColor = Color.White;
                 return;
             }
             try
             {
                 DescriptionTextBox.BackColor = Color.White;
                 _selectedItem.Info = DescriptionTextBox.Text;
-                _items[FindItemById()].Info = _selectedItem.Info;
             }
             catch (Exception exception)
             {
@@ -191,8 +222,20 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 return;
             }
+            if (_selectedItem.Category == (Category)CategoryComboBox.SelectedItem)
+                return;
             _selectedItem.Category = (Category)CategoryComboBox.SelectedItem;
-            _items[FindItemById()].Category = _selectedItem.Category;
+            DisplayItems();
+        }
+
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+            DisplayItems();
+        }
+
+        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayItems();
         }
     }
 }

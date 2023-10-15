@@ -51,6 +51,10 @@ namespace ObjectOrientedPractics
             {
                 OrdersTab.RefreshData();
             }
+            if (TabControl.SelectedIndex == 4)
+            {
+                return;
+            }
         }
     }
 }

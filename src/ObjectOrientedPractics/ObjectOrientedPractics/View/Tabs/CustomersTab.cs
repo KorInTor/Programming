@@ -164,7 +164,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void AddDiscountButton_Click(object sender, EventArgs e)
         {
-            if (CustomersListBox.SelectedIndex == -1 || _selectedCustomer == null) 
+            if (CustomersListBox.SelectedIndex == -1 || _selectedCustomer == null)
             {
                 return;
             }
