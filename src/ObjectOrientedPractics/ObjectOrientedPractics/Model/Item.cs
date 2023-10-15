@@ -2,7 +2,9 @@
 using ObjectOrientedPractics.Service;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +13,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит ифнормацию о товаре.
     /// </summary>
-    public class Item
+    public class Item : ICloneable, IEquatable<object>, IComparable<Item>
     {
         /// <summary>
         /// Хранит уникальный идентификатор.
@@ -112,6 +114,45 @@ namespace ObjectOrientedPractics.Model
             Cost = cost;
             Category = category;
             _id = IdGenerator.GetNextId();
+        }
+
+        /// <inheritdoc />  
+        public object Clone()
+        {
+            return new Item(this.Name, this.Info, this.Cost,this.Category);
+        }
+
+        /// <inheritdoc />  
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+            if (other is not Item)
+                return false;
+            if (object.ReferenceEquals(this, other))
+                return true;
+            var item2 = (Item)other;
+            return (this.Name == item2.Name) && (this.Info == item2.Info) && 
+                (this.Cost == item2.Cost) && (this.Category == item2.Category);
+        }
+
+        /// <summary>
+        /// Сравнивает два товара по цене и возвращает 1 если изначальная цена товара больше передаваемого, 0 если цены равны, 
+        /// -1 если изначальная цена товара меньше передаваемого.
+        /// </summary>
+        /// <param name="other">Передаваемый товар.</param>
+        /// <returns>Результат.</returns>
+        public int CompareTo(Item other)
+        {
+            if(this.Cost < other.Cost)
+            {
+                return -1;
+            }
+            else if (this.Cost > other.Cost)
+            {
+                return 1;
+            }
+            return 0;
         }
     }
 }

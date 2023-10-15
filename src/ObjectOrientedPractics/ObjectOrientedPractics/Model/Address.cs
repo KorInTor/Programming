@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит информацию о адрессе.
     /// </summary>
-    public class Address
+    public class Address : ICloneable, IEquatable<object>
     {
         /// <summary>
         /// Уникальный идентификатор данного класса.
@@ -169,6 +169,25 @@ namespace ObjectOrientedPractics.Model
         public override string ToString()
         {
             return $"{Country}, г.{City}, ул.{Street}, дом.{Building}, кв.{Apartment}.";
+        }
+
+        public object Clone()
+        {
+            return (new Address(this.Index, this.Country, this.City, this.Street, this.Building, this.Apartment));
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+            if (other is not Address)
+                return false;
+            if (object.ReferenceEquals(this, other))
+                return true;
+            var address2 = (Address)other;
+            return (this.Index == address2.Index) && (this.Country == address2.Country) &&
+           (this.City == address2.City) && (this.Street == address2.Street) &&
+           (this.Building == address2.Building) && (this.Apartment == address2.Apartment);
         }
     }
 }
