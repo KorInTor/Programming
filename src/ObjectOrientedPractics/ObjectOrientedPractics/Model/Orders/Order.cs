@@ -11,7 +11,7 @@ namespace ObjectOrientedPractics.Model.Orders
     /// <summary>
     /// Хранит информацию о заказе.
     /// </summary>
-    public class Order
+    public class Order : IEquatable<Object>
     {
         /// <summary>
         /// Уникальный идентификатор заказа.
@@ -154,6 +154,20 @@ namespace ObjectOrientedPractics.Model.Orders
             _id = IdGenerator.GetNextId();
             _date = DateTime.Now;
             _status = OrderStatus.New;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+            if (other is not Order)
+                return false;
+            if (object.ReferenceEquals(this, other))
+                return true;
+            var order2 = (Order)other;
+            return (this.Items == order2.Items) && (this.Address == order2.Address) &&
+                (this.Status == order2.Status) && (this.Date == order2.Date) &&
+                (this.DiscountAmount == order2.DiscountAmount);
         }
     }
 }
