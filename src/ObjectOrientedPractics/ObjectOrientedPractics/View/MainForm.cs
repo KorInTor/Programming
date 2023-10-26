@@ -12,6 +12,11 @@ namespace ObjectOrientedPractics
         /// </summary>
         Store _store = new Store();
 
+        private void Items_Changed(object sender,EventArgs e)
+        {
+            CartsTab.RefreshData();
+        }
+
         /// <summary>
         /// Создает экземпляр класса <see cref="MainForm"/>
         /// </summary>
@@ -24,6 +29,7 @@ namespace ObjectOrientedPractics
             CartsTab.Customers = _store.Customers;
             CartsTab.Items = _store.Items;
             OrdersTab.Customers = _store.Customers;
+            ItemsTab.ItemsChanged += Items_Changed;
         }
 
         private void CreateRandomObjects()

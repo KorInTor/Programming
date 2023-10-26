@@ -15,6 +15,7 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        public event EventHandler<EventArgs> ItemsChanged;
 
         List<Item> _items = new();
 
@@ -132,6 +133,7 @@ namespace ObjectOrientedPractics.View.Tabs
             var blankItem = new Item("Наименование", "Описание", 1, Category.Accessory);
             _items.Add(blankItem);
             DisplayItems();
+            
         }
 
         private void RemoveItemButton_Click(object sender, EventArgs e)
@@ -148,6 +150,7 @@ namespace ObjectOrientedPractics.View.Tabs
             NameTextBox.Clear();
             CategoryComboBox.SelectedItem = null;
             DisplayItems();
+            ItemsChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -170,6 +173,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     return;
                 _selectedItem.Cost = double.Parse(CostTextBox.Text);
                 DisplayItems();
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception exception)
             {
@@ -191,6 +195,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     return;
                 _selectedItem.Name = NameTextBox.Text;
                 DisplayItems();
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception exception)
             {
@@ -209,6 +214,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 DescriptionTextBox.BackColor = Color.White;
                 _selectedItem.Info = DescriptionTextBox.Text;
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception exception)
             {
@@ -226,6 +232,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 return;
             _selectedItem.Category = (Category)CategoryComboBox.SelectedItem;
             DisplayItems();
+            ItemsChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void FindTextBox_TextChanged(object sender, EventArgs e)
