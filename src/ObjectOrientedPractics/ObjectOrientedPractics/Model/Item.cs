@@ -15,6 +15,12 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Item : ICloneable, IEquatable<object>, IComparable<Item>
     {
+        public event EventHandler<EventArgs> NameChanged;
+
+        public event EventHandler<EventArgs> CostChanged;
+
+        public event EventHandler<EventArgs> InfoChanged;
+
         /// <summary>
         /// Хранит уникальный идентификатор.
         /// </summary>
@@ -58,8 +64,12 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 200, "Name");
-                _name = value;
+                if (_name != value)
+                {
+                    ValueValidator.AssertStringOnLength(value, 200, "Name");
+                    _name = value;
+                    NameChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
@@ -74,8 +84,12 @@ namespace ObjectOrientedPractics.Model
             }
             set 
             {
-                ValueValidator.AssertStringOnLength(value, 1000, "Info");
-                _info = value;
+                if (_info != value)
+                {
+                    ValueValidator.AssertStringOnLength(value, 1000, "Info");
+                    _info = value;
+                    InfoChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
@@ -90,8 +104,12 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertValueInRange(value, 0, 100000, "Cost");
-                _cost = value;
+                if (_cost != value)
+                {
+                    ValueValidator.AssertValueInRange(value, 0, 100000, "Cost");
+                    _cost = value;
+                    CostChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
