@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,14 +36,14 @@ namespace ObjectOrientedPractics.View.Tabs
             set
             {
                 _customers = value;
-                SortCustomersList();
+                UpdateCustomerList();
             }
         }
 
         /// <summary>
-        /// Сортировка списка <see cref="_customers"/> по свойству <see cref="Customer.Fullname"/>.
+        /// Сортировка списка <see cref="_customers"/> по свойству <see cref="Customer.Fullname"/> и вывод на <see cref="CustomersListBox"/>.
         /// </summary>
-        private void SortCustomersList()
+        private void UpdateCustomerList()
         {
             if (_customers == null)
             {
@@ -108,7 +107,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             var blankCustomer = new Customer("ФИО", new Address());
             _customers.Add(blankCustomer);
-            SortCustomersList();
+            UpdateCustomerList();
         }
 
         private void RemoveCustomerButton_Click(object sender, EventArgs e)
@@ -123,7 +122,7 @@ namespace ObjectOrientedPractics.View.Tabs
             _customers.RemoveAt(CustomersListBox.SelectedIndex);
             DiscountsListBox.Items.Clear();
             _selectedCustomer = null;
-            SortCustomersList();
+            UpdateCustomerList();
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,19 +134,22 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (_selectedCustomer == null)
             {
+                FullnameTextBox.BackColor = Color.White;
                 return;
             }
             try
             {
                 FullnameTextBox.BackColor = Color.White;
+                if (_selectedCustomer.Fullname == FullnameTextBox.Text)
+                    return;
                 _selectedCustomer.Fullname = FullnameTextBox.Text;
-                _customers[FindCustomerById()].Fullname = _selectedCustomer.Fullname;
+                UpdateCustomerList();
             }
             catch (Exception exception)
             {
                 FullnameTextBox.BackColor = Color.LightPink;
             }
-            SortCustomersList();
+            UpdateCustomerList();
         }
 
         private void PriorityCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -164,7 +166,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void AddDiscountButton_Click(object sender, EventArgs e)
         {
-            if (CustomersListBox.SelectedIndex == -1 || _selectedCustomer == null) 
+            if (CustomersListBox.SelectedIndex == -1 || _selectedCustomer == null)
             {
                 return;
             }
