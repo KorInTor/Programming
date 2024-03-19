@@ -1,4 +1,6 @@
-﻿using Contacts.ViewModel;
+﻿using Contacts.Model;
+using Contacts.Model.Services;
+using Contacts.ViewModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +23,18 @@ namespace Contacts
         {
             InitializeComponent();
             this.DataContext = new MainVM();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainVM DataContext = (MainVM)this.DataContext;
+            DataContext.Contacts = new (ContactSerializer.LoadContactList());
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MainVM DataContext = (MainVM)this.DataContext;
+            ContactSerializer.SaveContactList(new List<Contact>(DataContext.Contacts));
         }
     }
 }

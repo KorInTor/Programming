@@ -48,5 +48,35 @@ namespace Contacts.Model.Services
                 return null;
             }
         }
+
+        public static void SaveContactList(List<Contact> contactList)
+        {
+            if (!File.Exists(_filePath))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
+            }
+
+            string json = JsonConvert.SerializeObject(contactList);
+            File.WriteAllText(_filePath, json);
+        }
+
+        public static List<Contact> LoadContactList()
+        {
+            if (!File.Exists(_filePath))
+            {
+                return new List<Contact>();
+            }
+
+            string json = File.ReadAllText(_filePath);
+            try
+            {
+                List<Contact> contact = JsonConvert.DeserializeObject<List<Contact>>(json);
+                return contact;
+            }
+            catch
+            {
+                return new List<Contact>();
+            }
+        }
     }
 }
