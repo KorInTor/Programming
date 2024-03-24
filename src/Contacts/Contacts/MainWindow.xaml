@@ -6,42 +6,76 @@
         xmlns:local="clr-namespace:Contacts"
         xmlns:ViewModel="clr-namespace:Contacts.ViewModel" x:Class="Contacts.MainWindow"
         mc:Ignorable="d"
-        Title="Contacts" MinHeight="270" MinWidth="524" Height="270" Width="524" Icon="/Resources/contacts_96x96.ico">
+        Title="Contacts" MinHeight="270" MinWidth="524" Height="270" Width="524" Icon="/Resources/contacts_96x96.ico" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Window.DataContext>
         <ViewModel:MainVM/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
-        </Grid.RowDefinitions>
-        <GroupBox Header="Edit Contact" Grid.Row="0" Grid.Column="0" Margin="10,10,10,10">
-            <StackPanel Margin="3,3,3,3">
-                <Label Content="Name:"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Phone Number:"/>
-                <TextBox Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Email:"/>
-                <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="Read Contact" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10">
-            <StackPanel Margin="3,3,3,3">
-                <Label Content="Name:"/>
-                <Label Content="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Height="17.96" Padding="5,0,5,0"/>
-                <Label Content="Phone Number:"/>
-                <Label Content="{Binding PhoneNumber, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Height="17.96" Padding="5,0,5,0"/>
-                <Label Content="Email:"/>
-                <Label Content="{Binding Email, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Height="17.96" Padding="5,0,5,0"/>
-            </StackPanel>
-        </GroupBox>
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1" FlowDirection="RightToLeft">
-            <Button Content="Load" Height="25" Width="75" Margin="3,3,3,3" Command="{Binding LoadCommand, Mode=OneWay}"/>
-            <Button Content="Save" Height="25" Width="75" Margin="3,3,3,3" Command="{Binding SaveCommand, Mode=OneWay}" CommandParameter="{Binding Contact}"/>
-        </StackPanel>
+        <Border Padding="8" Background="#FFF8F8F8">
+            <Grid Background="#FFF8F8F8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel LastChildFill="True" Grid.ColumnSpan="3">
+                    <Label Content="Find:" DockPanel.Dock="Left" Margin="3" Padding="0"/>
+                    <TextBox HorizontalAlignment="Stretch" Margin="3"/>
+                </DockPanel>
+
+                <ListBox Grid.Row="1" Grid.ColumnSpan="3" Margin="3" ItemsSource="{Binding Contacts}" DisplayMemberPath="Name" SelectedIndex="{Binding SelectedContactIndex}"/>
+
+                <Button Content="Add" Height="25" Width="auto" Margin="3" Command="{Binding AddCommand, Mode=OneWay}" Grid.Row="2" Grid.Column="0"/>
+                <Button Content="Edit" Height="25" Width="auto" Margin="3" Command="{Binding EditCommand, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+                <Button Content="Remove" Height="25" Width="auto" Margin="3" Command="{Binding RemoveCommand, Mode=OneWay}" Grid.Row="2" Grid.Column="2"/>
+            </Grid>
+        </Border>
+        
+        <GridSplitter HorizontalAlignment="Left" VerticalAlignment="Top" Width="3" Grid.Column="1" Background="White"/>
+
+        <Border Padding="8" Background="#FFF8F8F8" Grid.Column="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            
+                <Image Width="100" Height="100" Source="/Resources/contacts_96x96.ico" Grid.RowSpan="6" Grid.Row="1" Margin="3" VerticalAlignment="Top"/>
+
+                <Label Content="Name:" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Left" Padding="0"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding SelectedContact.Name}" IsReadOnly="{Binding CanEditData, ValidatesOnNotifyDataErrors=True}"/>
+
+                <Label Content="Phone Number:" Grid.Row="2" Grid.Column="1" Margin="3" HorizontalAlignment="Left" Padding="0"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding SelectedContact.PhoneNumber}" IsReadOnly="{Binding CanEditData, ValidatesOnNotifyDataErrors=True}"/>
+
+                <Label Content="Email:" Grid.Row="4" Grid.Column="1" Margin="3" HorizontalAlignment="Left" Padding="0"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding SelectedContact.Email}" IsReadOnly="{Binding CanEditData, ValidatesOnNotifyDataErrors=True}"/>
+
+                <Button Content="Apply" Margin="3,50,3,50" Grid.Column="1" Grid.Row="6" Height="25" Width="75" HorizontalAlignment="Left" Command="{Binding ApplyCommand, ValidatesOnNotifyDataErrors=True}" Visibility="{Binding CanApplyCommand, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
