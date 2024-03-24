@@ -16,7 +16,7 @@ namespace Contacts.ViewModel
         private bool _canAddCommand = true;
         private bool _canEditCommand;
         private bool _canRemoveCommand;
-        private bool _canEditData = false;
+        private bool _isDataReadOnly = true;
         private int _selectedContactIndex = -1;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -31,12 +31,15 @@ namespace Contacts.ViewModel
             BlockButtons();
             SelectedContact = new Contact();
             SelectedContactIndex = -1;
+            IsDataReadOnly = false;
             CanApplyCommand = true;
         }
 
         private void EditContact(object obj)
         {
             BlockButtons();
+            SelectedContact = new Contact(Contacts[SelectedContactIndex]);
+            IsDataReadOnly = false;
             CanApplyCommand = true;
         }
 
@@ -61,22 +64,28 @@ namespace Contacts.ViewModel
             {
                 Contacts.Add(SelectedContact);
             }
+            else 
+            {
+                Contacts[SelectedContactIndex] = SelectedContact;
+            }
             UnblockButtons();
             CanApplyCommand = false;
+            IsDataReadOnly = true;
         }
 
-        public bool CanEditData
+        public bool IsDataReadOnly
         {
             get
             {
-                return _canEditData;
+                return _isDataReadOnly;
             }
             set
             {
-                _canEditData = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanEditData)));
+                _isDataReadOnly = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsDataReadOnly)));
             }
         }
+
         public int SelectedContactIndex
         {
             get
@@ -89,6 +98,7 @@ namespace Contacts.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedContactIndex)));
             }
         }
+
         public bool CanApplyCommand
         {
             get 
@@ -141,47 +151,11 @@ namespace Contacts.ViewModel
         {
             if (e.PropertyName == nameof(SelectedContactIndex) && SelectedContactIndex != -1)
             {
+                SelectedContact = Contacts[SelectedContactIndex];
+                IsDataReadOnly = true;
+                CanApplyCommand = false;
                 CanEditCommand = true;
                 CanRemoveCommand = true;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return SelectedContact.Name;
-            }
-            set
-            {
-                SelectedContact.Name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
-            }
-        }
-
-        public string PhoneNumber
-        {
-            get
-            {
-                return SelectedContact.PhoneNumber;
-            }
-            set
-            {
-                SelectedContact.PhoneNumber = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PhoneNumber)));
-            }
-        }
-
-        public string Email
-        {
-            get
-            {
-                return SelectedContact.Email;
-            }
-            set
-            {
-                SelectedContact.Email = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Email)));
             }
         }
 
