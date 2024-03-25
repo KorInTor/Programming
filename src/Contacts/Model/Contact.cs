@@ -87,7 +87,7 @@ namespace Contacts.Model
             set
             {
                 _phoneNumber = value;
-                PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(PhoneNumberRegEx)));
+                PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(PhoneNumber)));
             }
         }
 
@@ -104,8 +104,32 @@ namespace Contacts.Model
             }
         }
 
-        public string Error => string.Empty;
-    
+        public string Error
+        {
+            get
+            {
+                var nameError = this[nameof(Name)];
+                var phoneNumberError = this[nameof(PhoneNumber)];
+                var emailError = this[nameof(Email)];
+
+                if (!string.IsNullOrEmpty(nameError))
+                {
+                    return nameError;
+                }
+                if (!string.IsNullOrEmpty(phoneNumberError))
+                {
+                    return phoneNumberError;
+                }
+                if (!string.IsNullOrEmpty(emailError))
+                {
+                    return emailError;
+                }
+
+                return string.Empty;
+            }
+        }
+
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Contacts"
-        xmlns:ViewModel="clr-namespace:Contacts.ViewModel" x:Class="Contacts.MainWindow"
+        xmlns:ViewModel="clr-namespace:Contacts.ViewModel;assembly=ViewModel" x:Class="Contacts.MainWindow"
         mc:Ignorable="d"
         Title="Contacts" MinHeight="270" MinWidth="524" Height="270" Width="524" Icon="/Resources/contacts_96x96.ico" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
@@ -65,7 +65,7 @@
         <Border Padding="8" Background="#FFF8F8F8" Grid.Column="2">
             <StackPanel>
                 <Controls:ContactControl DataContext="{Binding SelectedContact}"/>
-                <Button Content="Apply" Margin="3,50,3,50" Grid.Column="1" Grid.Row="6" Height="25" Width="75" HorizontalAlignment="Left" Command="{Binding ApplyCommand, ValidatesOnNotifyDataErrors=True}" Visibility="{Binding CanApplyCommand, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Button Content="Apply" Margin="3,50,3,50" Grid.Column="1" Grid.Row="6" Height="25" Width="75" HorizontalAlignment="Left" Command="{Binding ApplyCommand, ValidatesOnNotifyDataErrors=True}" Visibility="{Binding CanApplyAndNoErrors, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             </StackPanel>
         </Border>
     </Grid>
