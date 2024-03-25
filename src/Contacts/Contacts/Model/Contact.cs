@@ -1,14 +1,69 @@
 ﻿using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace Contacts.Model
 {
-    public class Contact : INotifyPropertyChanged
+    public partial class Contact : INotifyPropertyChanged, IDataErrorInfo
     {
-        private string _name;
+        private string _name = string.Empty;
 
-        private string _phoneNumber;
+        private string _phoneNumber = string.Empty;
 
-        private string _email;
+        private string _email = string.Empty;
+
+        public Contact() { }
+
+        public Contact( Contact other)
+        {
+            this.Name = other.Name;
+            this.PhoneNumber = other.PhoneNumber;
+            this.Email = other.Email;
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string result = string.Empty;
+
+                if (columnName == nameof(Name))
+                {
+                    if (this.Name.Length == 0 || this.Name.Length > 100)
+                    {
+                        result = "Имя должно быть не пустым и не длиннее 100 символов";
+                    }
+                }
+
+                if (columnName == nameof(PhoneNumber))
+                {
+                    if (string.IsNullOrEmpty(PhoneNumber))
+                        result = "Номер телефона не может быть пустым.";
+
+                    if (PhoneNumber.Length > 100)
+                        result = "Номер телефона не должен быть длиннее 100 символов.";
+
+                    if (!PhoneNumberRegEx().IsMatch(PhoneNumber))
+                        result = "Номер телефона содержит недопустимые символы.";
+                }
+
+                if (columnName == nameof(Email))
+                {
+                    if (string.IsNullOrEmpty(Email))
+                    {
+                        result = "Email не может быть пустым.";
+                    }
+                    if (Email.Length > 100)
+                    {
+                        result = "Email не должен быть длиннее 100 символов.";
+                    }
+                    if (!SimpleEmailRegEx().IsMatch(Email))
+                    {
+                        result = "Неккоректный Email.";
+                    }
+                }
+                return result;
+            }
+        }
 
         public string Name
         {
@@ -32,7 +87,7 @@ namespace Contacts.Model
             set
             {
                 _phoneNumber = value;
-                PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(PhoneNumber)));
+                PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(PhoneNumberRegEx)));
             }
         }
 
@@ -49,6 +104,15 @@ namespace Contacts.Model
             }
         }
 
+        public string Error => string.Empty;
+    
+
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        [GeneratedRegex(@"^[\+]?[\d\-\(\)]+$")]
+        private static partial Regex PhoneNumberRegEx();
+
+        [GeneratedRegex(@"^[^@]+@[^@]+$")]
+        private static partial Regex SimpleEmailRegEx();
     }
 }

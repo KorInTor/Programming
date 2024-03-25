@@ -28,7 +28,12 @@ namespace Contacts
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MainVM DataContext = (MainVM)this.DataContext;
-            DataContext.Contacts = new (ContactSerializer.LoadContactList());
+            var contacts = ContactSerializer.LoadContactList();
+            DataContext.Contacts.Clear();
+            foreach (var contact in contacts)
+            {
+                DataContext.Contacts.Add(contact);
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
